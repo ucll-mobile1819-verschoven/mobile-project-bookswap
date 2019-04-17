@@ -1,44 +1,7 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import MapView from 'react-native-maps';
-
-const usersMap = props => {
-    let userLocationMarker = null;
-    if(props.userLocation) {
-        userLocationMarker= <MapView.Marker coordinate={props.userLocation}/>;
-    }
-
-    const sellerLocationMarker = props.sellerLocation.map(sellerLocation => (
-        <MapView.Marker coordinate={sellerLocation} key={sellerLocation.Id}/>
-    ));
-
-    return (
-        <View styles={styles.mapContainer}>
-            <MapView region={props.userLocation} style={styles.map} customMapStyle={mapStyle}> 
-               {userLocationMarker}
-               {sellerLocationMarker}
-            </MapView>
-        </View>
-    );
-};
-
-const styles = StyleSheet.create({
-    mapContainer: {
-        width: '100%',
-        height: 150,
-        marginTop: 20
-    },
-    map: {
-        width: '100%',
-        height: '100%',
-    },
-    mapStyle:{
-            
-    }
-});
+import {StyleSheet} from 'react-native';
 
 //alternate map style for fun
-const mapStyle = StyleSheet.create([
+export const darkMap = StyleSheet.create([
     {
       "elementType": "geometry",
       "stylers": [
@@ -271,7 +234,3 @@ const mapStyle = StyleSheet.create([
       ]
     }
   ])
-
-
-
-export default usersMap
