@@ -1,25 +1,49 @@
-package be.ucll.swapbook.domain;
+package be.ucll.swapbook.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.validation.Valid;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue
-    private long userId;
+    private String userId;
 
+    @NotNull(message = "Invalid first name")
+    @Size(min = 1, max = 30, message = "Invalid first name")
     private String firstname;
+
+    @NotNull(message = "Invalid last name")
+    @Size(min = 1, max = 30, message = "Invalid last name")
     private String lastname;
+
+    @NotNull(message = "Invalid residence")
+    @Size(min = 1, max = 50, message = "Invalid residence")
     private String residence;
+
+    @NotNull(message = "Invalid email")
+    @Size(min = 1, max = 30, message = "Invalid email")
+    @Email(message = "Invalid email")
     private String email;
+
+    @NotNull(message = "Invalid title")
+    @Size(min = 1, max = 30, message = "Invalid title")
+    @JsonIgnore
     private String password;
-    private List<Book> books;
+
+    //@OneToMany
+    //@JoinColumn(name = "bookUserId", referencedColumnName = "userId")
+    //private List<Book> books;
+
+    public User() {}
 
     public User(String firstname, String lastname, String residence, String email, String password) {
         setFirstname(firstname);
@@ -27,6 +51,14 @@ public class User {
         setResidence(residence);
         setEmail(email);
         setPassword(password);
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getFirstname() {
@@ -68,7 +100,7 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
+/*
     public List<Book> getBooks() {
         return this.books;
     }
@@ -80,4 +112,5 @@ public class User {
     public void sellBook(Book book) {
         books.remove(book);
     }
+    */
 }

@@ -1,19 +1,20 @@
-package be.ucll.swapbook.domain;
+package be.ucll.swapbook.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Objects;
 
 @Entity
+@Table(name = "book")
 public class Book {
 
     @Id
     @GeneratedValue
-    private long bookId;
+    private String bookId;
 
     @NotNull(message = "Invalid title")
     @Size(min = 1, max = 30, message = "Invalid title")
@@ -35,12 +36,25 @@ public class Book {
     @Size(min = 1, max = 10, message = "Invalid condition")
     private String condition;
 
+    private String bookUserId;
+
+    public Book() {}
+
     public Book(String title, String author, String isbn, String price, String condition) {
         setTitle(title);
         setAuthor(author);
         setIsbn(isbn);
         setPrice(price);
         setCondition(condition);
+        setBookUserId(bookUserId);
+    }
+
+    public String getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
     }
 
     public String getTitle() {
@@ -81,6 +95,14 @@ public class Book {
 
     public void setCondition(String condition) {
         this.condition = condition;
+    }
+
+    public String getBookUserId() {
+        return bookUserId;
+    }
+
+    public void setBookUserId(String bookUserId) {
+        this.bookUserId = bookUserId;
     }
 
     @Override
