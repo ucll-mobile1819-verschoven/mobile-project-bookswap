@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, Button, SafeAreaView } from 'react-native';
-import { createStackNavigator, createAppContainer, createMaterialTopTabNavigator} from 'react-navigation';
+import { createStackNavigator, createAppContainer, createMaterialTopTabNavigator, createSwitchNavigator} from 'react-navigation';
 
 import Logo from './src/components/Logo';
 
@@ -10,8 +10,9 @@ import AddBookScreen from './src/screens/AddBookScreen';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { styles } from './src/styles/Style';
+//import HomeScreen from './src/screens/HomeScreen';
 
-
+import WelcomeScreen from './src/screens/WelcomeScreen';
 
 //Home  --  show books
 class HomeScreen extends React.Component{  
@@ -52,7 +53,6 @@ class HomeScreen extends React.Component{
     )
   }
 };
-
 
 const DashboardTabNavigator = createMaterialTopTabNavigator(
   {
@@ -102,14 +102,6 @@ const RootStack = createStackNavigator(
   {
     Main: {
       screen : DashboardTabNavigator,
-
-      navigationOptions: {headerTitle: <Logo/>, headerStyle: {
-        backgroundColor: '#164050',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },}
     },
     SellerProfile: {
       screen: SellerProfileScreen,
@@ -120,14 +112,12 @@ const RootStack = createStackNavigator(
     headerMode: 'none',
   },
   {
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: '#164050',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
+    defaultNavigationOptions: ({navigation}) => {
+      return {
+        headerLeft: (
+          <Logo/>
+        )
+      }  
     },
   },
   {
@@ -138,7 +128,13 @@ const RootStack = createStackNavigator(
 
 );
 
-const AppContainer = createAppContainer(RootStack);
+
+const SwitchNavigator = createSwitchNavigator({
+  Welcome: {screen: WelcomeScreen},
+  Tabnav: {screen: RootStack}
+})
+
+const AppContainer = createAppContainer(SwitchNavigator);
 
 export default class App extends React.Component {
   render() {
