@@ -1,11 +1,23 @@
 import React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View, Button, Image } from 'react-native';
 import { createStackNavigator, createAppContainer} from 'react-navigation';
 
 import Location from './src/components/Location';
 import {styles} from './src/styles/Style';
 
+class LogoTitle extends React.Component {
+  render(){
+    return  (
+      <Image source={require('./src/images/book.png')} style={{ width: 30, height: 30, marginLeft: 5 }}/>
+    )
+  }
+}
+
 class HomeScreen extends React.Component{  
+  static navigationOptions = {
+    headerTitle: <LogoTitle />,
+  };
+
   render(){
     return(
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -32,7 +44,7 @@ class ProfileScreen extends React.Component {
 
 class SettingsScreen extends React.Component {
   //werkt niet, wss ook niet maken
-  switchTheme = (darkTheme) => {
+ /* switchTheme = (darkTheme) => {
     if (darkTheme == null){
       console.log("initialize")
       darkTheme = true;
@@ -41,10 +53,10 @@ class SettingsScreen extends React.Component {
       console.log("swap")
     }
     console.log(darkTheme);
-  }
+  }*/
 
   render() {
-    let darkTheme;
+    //let darkTheme;
     return (
       <View style={{backgroundColor: '#eee'}}>
         <Text>Settings</Text>
