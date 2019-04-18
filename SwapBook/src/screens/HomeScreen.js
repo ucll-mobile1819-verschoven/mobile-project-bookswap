@@ -1,15 +1,8 @@
 import React from 'react';
 import { Text, View, Button, SafeAreaView } from 'react-native';
-import { createStackNavigator, createAppContainer, createMaterialTopTabNavigator, createSwitchNavigator} from 'react-navigation';
 
-import Logo from './src/components/Logo';
-
-import ProfileScreen from './src/screens/ProfileScreen';
-import SellerProfileScreen from './src/screens/SellerProfileScreen';
-import AddBookScreen from './src/screens/AddBookScreen';
-
+import Logo from '../components/Logo';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { styles } from './src/styles/Style';
 
 
 //Home  --  show books
