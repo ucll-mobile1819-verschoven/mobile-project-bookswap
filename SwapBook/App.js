@@ -1,84 +1,55 @@
 import React from 'react';
-import { Text, View, Button, Image } from 'react-native';
 import { createStackNavigator, createAppContainer} from 'react-navigation';
-
-import Location from './src/components/Location';
-import {styles} from './src/styles/Style';
-
-class LogoTitle extends React.Component {
-  render(){
-    return  (
-      <Image source={require('./src/images/book.png')} style={{ width: 30, height: 30, marginLeft: 5 }}/>
-    )
-  }
-}
-
-class HomeScreen extends React.Component{  
-  static navigationOptions = {
-    headerTitle: <LogoTitle />,
-  };
-
-  render(){
-    return(
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Home Screen</Text>
-      <Button title="Go to Profile" onPress={() => this.props.navigation.navigate('Profile')}/>
-      <Button title="Go To Settings" onPress={() => this.props.navigation.navigate('Settings')}/>
-      </View>
-    )
-  }
-};
-
-class ProfileScreen extends React.Component {
-  render() {
-    return (
-      <View>
-        <Text>Details Screen</Text>
-        <Button title="Go to Home" onPress={() => this.props.navigation.navigate('Home')}/>
-        <Location />
-      </View>
-    );
-  }
-}
+import AddBookScreen from './src/screens/AddBookScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
+import SellerProfileScreen from './src/screens/SellerProfileScreen';
+import HomeScreen from './src/screens/HomeScreen';
 
 
-class SettingsScreen extends React.Component {
-  //werkt niet, wss ook niet maken
- /* switchTheme = (darkTheme) => {
-    if (darkTheme == null){
-      console.log("initialize")
-      darkTheme = true;
-    } else{
-      darkTheme = !darkTheme;
-      console.log("swap")
-    }
-    console.log(darkTheme);
-  }*/
 
-  render() {
-    //let darkTheme;
-    return (
-      <View style={{backgroundColor: '#eee'}}>
-        <Text>Settings</Text>
-        <Button title="Go to Home" onPress={() => this.props.navigation.goBack()}/>
-        {/*<Button title="Switch Theme" onPress={() => this.switchTheme(darkTheme)}/>*/}
-      </View>
-    );
-  }
-}
-
-const AppNavigator = createStackNavigator(
+//stacknav
+const MainStack = createStackNavigator(
   {
-    Home: HomeScreen,
-    Profile: ProfileScreen,
-    Settings: SettingsScreen,
+    Home: {
+      screen: HomeScreen,
+    },
+    Profile: {
+      screen: ProfileScreen,
+    },
+    AddBook: {
+      screen: AddBookScreen,
+    }, 
   },
   {
     initialRouteName: "Home",
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }, 
   }
 );
 
-const AppContainer = createAppContainer(AppNavigator);
+const RootStack = createStackNavigator(
+  {
+    Main: {
+      screen : MainStack,
+    },
+    SellerProfile: {
+      screen: SellerProfileScreen,
+    },
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
+  }
+);
+
+const AppContainer = createAppContainer(RootStack);
 
 export default class App extends React.Component {
   render() {
