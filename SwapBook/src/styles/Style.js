@@ -23,5 +23,12 @@ export const styles = StyleSheet.create({
     },
     darkTheme: {
         customMapStyle: customMapStyle,
-    }
+    },
+    headerStyle: {
+        backgroundColor: '#164050',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
 });

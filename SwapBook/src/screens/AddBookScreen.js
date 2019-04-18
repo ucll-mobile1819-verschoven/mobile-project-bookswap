@@ -10,7 +10,6 @@ export default class AddBookScreen extends React.Component {
       return (
         <View style={{backgroundColor: '#eee'}}>
           <Text>Add A Book</Text>
-          <Button title="Go to Home" onPress={() => this.props.navigation.goBack()}/>
         </View>
       );
     }
