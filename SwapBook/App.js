@@ -1,19 +1,13 @@
 import React from 'react';
-import { Text, View, Button, SafeAreaView } from 'react-native';
 import { createStackNavigator, createAppContainer, createMaterialTopTabNavigator, createSwitchNavigator} from 'react-navigation';
-
+import Icon from 'react-native-vector-icons/Ionicons';
 import Logo from './src/components/Logo';
 
+import HomeScreen from './src/screens/HomeScreen';
+import WelcomeScreen from './src/screens/WelcomeScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import SellerProfileScreen from './src/screens/SellerProfileScreen';
 import AddBookScreen from './src/screens/AddBookScreen';
-
-import Icon from 'react-native-vector-icons/Ionicons';
-import { styles } from './src/styles/Style';
-import HomeScreen from './src/screens/HomeScreen';
-
-import WelcomeScreen from './src/screens/WelcomeScreen';
-
 
 
 const DashboardTabNavigator = createMaterialTopTabNavigator(
@@ -40,6 +34,7 @@ const DashboardTabNavigator = createMaterialTopTabNavigator(
       ) ,
     }, 
   },
+
   {
     initialRouteName: 'Home',
     order: ['Profile', 'Home', 'AddBook'],
@@ -56,6 +51,18 @@ const DashboardTabNavigator = createMaterialTopTabNavigator(
       showIcon: true,
     },
   }, 
+    {//finds and returns name but doesn't want to mix with the other settings
+ navigationOptions: ({navigation}) => {
+  const{ routeName} = navigation.state.routes[navigation.state.index];
+  console.log(routeName);
+  return {
+    headerTitle: routeName,
+    headerLeft: (
+      <Logo/>
+    )
+  };
+}
+},
 );
 
 
@@ -74,8 +81,11 @@ const RootStack = createStackNavigator(
     headerMode: 'none',
   },
   {
-    defaultNavigationOptions: ({navigation}) => {
+    navigationOptions: ({navigation}) => {
+      const{ routeName} = navigation.state.routes[navigation.state.index];
+      //console.log(routeName);
       return {
+        headerTitle: routeName,
         headerLeft: (
           <Logo/>
         )

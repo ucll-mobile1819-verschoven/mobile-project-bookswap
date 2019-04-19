@@ -1,6 +1,9 @@
 import React from 'react';
 import { Text, View, Button } from 'react-native';
 import Location from '../components/Location';
+import {Header} from 'react-native-elements';
+import Logo from '../components/Logo';
+import { styles } from '../styles/Style';
 //modal -- "popup"  When cliking on a book it will show the info of the seller
 export default class SellerProfileScreen extends React.Component {
   static navigationOptions = {
@@ -19,8 +22,7 @@ export default class SellerProfileScreen extends React.Component {
     const otherParam = params ? params.otherParam : null;
     return (
       <View>
-        <Text>This is a modal -- And it will show the info of the seller of the book you clicked</Text>
-      
+        <Header leftComponent={ <Logo/> } centerComponent={{ text: 'Info Book', style: { color: '#fff' } }} style={styles.headerStyle}/>
         <Button onPress={()=> this.props.navigation.goBack()} title='Go Back'/>
         <Text>Info of the seller will be put on this page</Text>
         <Text>itemId: {JSON.stringify(itemId)}</Text>

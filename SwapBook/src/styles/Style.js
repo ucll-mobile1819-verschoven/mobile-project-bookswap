@@ -26,9 +26,10 @@ export const styles = StyleSheet.create({
     },
     headerStyle: {
         backgroundColor: '#164050',
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            fontWeight: 'bold',
+        },
       },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
+      
 });

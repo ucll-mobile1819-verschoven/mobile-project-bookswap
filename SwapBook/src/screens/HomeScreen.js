@@ -1,8 +1,9 @@
 import React from 'react';
 import { Text, View, Button, SafeAreaView } from 'react-native';
-
+import {Header} from 'react-native-elements';
 import Logo from '../components/Logo';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { styles } from '../styles/Style';
 
 
 //Home  --  show books
@@ -11,13 +12,13 @@ export default class HomeScreen extends React.Component{
     const params = navigation.state.params || {};
     return {
       headerTitle: <Logo/>,
-      headerRight: (
+    /*  headerRight: (
         <Button onPress={params.increaseCount} title="+1" color="#eee" />
-      ),
+      ),*/
     }
   };
 
-  componentWillMount() {
+  /*componentWillMount() {
     this.props.navigation.setParams({ increaseCount: this._increaseCount });
   }
   state = {
@@ -25,14 +26,15 @@ export default class HomeScreen extends React.Component{
   };
   _increaseCount = () => {
     this.setState({ count: this.state.count + 1 });
-  };
+  };*/
 
   render(){
     return(
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ alignItems: "center", justifyContent: "center" }}>
+      <Header leftComponent={ <Logo/> } centerComponent={{ text: 'SwapBook', style: { color: '#fff' } }} style={styles.headerStyle}/>
       <Text>Home Screen</Text>
-      {/*test */}
-      <Text>Count: {this.state.count}</Text>
+      {/*<Text>Count: {this.state.count}</Text> */}
+      
       {/*test icons*/}
       <Icon name='ios-home' color={'#000'} size={24}/>
       <Icon name='person' color={'#000'} size={24}/>
