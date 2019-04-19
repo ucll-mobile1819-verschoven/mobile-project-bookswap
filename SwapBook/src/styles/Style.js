@@ -34,6 +34,31 @@ export const styles = StyleSheet.create({
     buttonStyle: {
         backgroundColor: '#144D82',
         color: '#fff'
-    }    
+    },
+    formStyle:{
+        justifyContent: 'center',
+        marginTop: 10,
+        padding: 20,
+        backgroundColor: '#ffffff',
+    }, 
+    formError:{
+        color: 'red',
+        fontSize: 18,
+        marginBottom: 7,
+        fontWeight: '600'
+    },
+    formOk:{
+        color: '#0BB586',
+      fontSize: 18,
+      marginBottom: 7,
+      fontWeight: '600'
+    }, 
+    border:{
+        borderWidth: 2,
+         borderColor:'#0BB586',
+          borderRadius:5,
+           margin:5,
+            padding: 5
+    }
       
 });

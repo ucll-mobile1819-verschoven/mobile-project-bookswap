@@ -48,7 +48,7 @@ const DashboardTabNavigator = createMaterialTopTabNavigator(
     tabBarPosition: 'bottom',
     tabBarOptions:{
       
-      activeTintColor: 'orange',
+      activeTintColor: '#FFCF4E',
       inactiveTintColor: '#f2f2f2',
       style: {
         backgroundColor: '#0BB586',

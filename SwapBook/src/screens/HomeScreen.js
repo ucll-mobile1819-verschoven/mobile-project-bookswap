@@ -35,11 +35,6 @@ export default class HomeScreen extends React.Component{
       <Header leftComponent={ <Logo/> } centerComponent={{ text: 'SwapBook', style: { color: '#fff',}}} containerStyle={{backgroundColor:'#0BB586'}}/>
       <Text>Home Screen</Text>
       {/*<Text>Count: {this.state.count}</Text> */}
-      
-      {/*test icons*/}
-      <Icon name={'ios-home'} color={'orange'} size={24} onPress={() => this.props.navigation.navigate('Home')}/>
-      <Icon name={'ios-person'} color={'orange'} size={24} onPress={() => this.props.navigation.navigate('Profile')}/>
-      <Icon name={'ios-add-circle'} color={'orange'} size={24} onPress={() => this.props.navigation.navigate('AddBook')}/>
       {/*This will be a list of books, when clicked, info of the book will be shown*/}
       <Button title="Boek X" onPress={() => this.props.navigation.navigate('SellerProfile' , {itemId: 86, otherParam: 'more info user'})} color="#0BB586" />
       <Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook')} color="#0BB586"/>
