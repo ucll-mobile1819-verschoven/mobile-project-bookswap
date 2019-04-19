@@ -2,9 +2,9 @@ import React from 'react';
 import { Text, View, Button, SafeAreaView } from 'react-native';
 import {Header} from 'react-native-elements';
 import Logo from '../components/Logo';
-//import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { styles } from '../styles/Style';
-import {Ionicons} from '@expo/vector-icons'
+//import {Ionicons} from '@expo/vector-icons'
 
 //Home  --  show books
 export default class HomeScreen extends React.Component{  
@@ -31,18 +31,18 @@ export default class HomeScreen extends React.Component{
 
   render(){
     return(
-      <View style={{ alignItems: "center", justifyContent: "center" }}>
-      <Header leftComponent={ <Logo/> } centerComponent={{ text: 'SwapBook', style: { color: '#fff' } }} style={styles.headerStyle}/>
+      <View style={styles.centered}>
+      <Header leftComponent={ <Logo/> } centerComponent={{ text: 'SwapBook', style: { color: '#fff',}}} containerStyle={{backgroundColor:'#0BB586'}}/>
       <Text>Home Screen</Text>
       {/*<Text>Count: {this.state.count}</Text> */}
       
       {/*test icons*/}
-      <Ionicons name='home' color={'#000'} size={24}/>
-      <Ionicons name='user' color={'#000'} size={24}/>
-      <Ionicons name='pluscircle' color={'#000'} size={24}/>
+      <Icon name={'ios-home'} color={'orange'} size={24} onPress={() => this.props.navigation.navigate('Home')}/>
+      <Icon name={'ios-person'} color={'orange'} size={24} onPress={() => this.props.navigation.navigate('Profile')}/>
+      <Icon name={'ios-add-circle'} color={'orange'} size={24} onPress={() => this.props.navigation.navigate('AddBook')}/>
       {/*This will be a list of books, when clicked, info of the book will be shown*/}
-      <Button title="Boek X" onPress={() => this.props.navigation.navigate('SellerProfile' , {itemId: 86, otherParam: 'more info user'})}  color='#eee'/>
-      <Button title="Ad A Book" onPress={() => this.props.navigation.navigate('AddBook')}/>
+      <Button title="Boek X" onPress={() => this.props.navigation.navigate('SellerProfile' , {itemId: 86, otherParam: 'more info user'})} color="#0BB586" />
+      <Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook')} color="#0BB586"/>
       </View>
     )
   }

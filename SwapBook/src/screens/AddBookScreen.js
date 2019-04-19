@@ -8,7 +8,7 @@ export default class AddBookScreen extends React.Component {
     render() {
       return (
         <View style={{backgroundColor: '#eee'}}>
-          <Header leftComponent={ <Logo/> } centerComponent={{ text: 'Add A Book', style: { color: '#fff' } }} style={styles.headerStyle}/>
+          <Header leftComponent={ <Logo/> } centerComponent={{ text: 'Add A Book', style: { color: '#fff' } }} containerStyle={{backgroundColor:'#0BB586'}}/>
           <Text>Add A Book</Text>
         </View>
       );

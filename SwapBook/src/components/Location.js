@@ -62,7 +62,7 @@ export default class Location extends React.Component{
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Button title="Get Seller Location" onPress={this.getSellerLocationHandler} style={styles.flex1}/>
+          <Button title="Get Seller Location" onPress={this.getSellerLocationHandler} style={styles.flex1} color='#0BB586'/>
           <FetchLocation onGetLocation={this.getUserLocationHandler} style={styles.flex2}/>
         </View>
         <UsersMap userLocation={this.state.userLocation} sellerLocation={this.state.sellerLocation} style={styles.flex3}/>

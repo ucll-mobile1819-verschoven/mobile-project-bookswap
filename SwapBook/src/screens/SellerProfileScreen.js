@@ -22,8 +22,8 @@ export default class SellerProfileScreen extends React.Component {
     const otherParam = params ? params.otherParam : null;
     return (
       <View>
-        <Header leftComponent={ <Logo/> } centerComponent={{ text: 'Info Book', style: { color: '#fff' } }} style={styles.headerStyle}/>
-        <Button onPress={()=> this.props.navigation.goBack()} title='Go Back'/>
+        <Header leftComponent={ <Logo/> } centerComponent={{ text: 'Info Book', style: { color: '#fff' } }} containerStyle={{backgroundColor:'#0BB586'}}/>
+        <Button onPress={()=> this.props.navigation.goBack()} title='Go Back' color="#0BB586"/>
         <Text>Info of the seller will be put on this page</Text>
         <Text>itemId: {JSON.stringify(itemId)}</Text>
         <Text>otherParam: {JSON.stringify(otherParam)}</Text>

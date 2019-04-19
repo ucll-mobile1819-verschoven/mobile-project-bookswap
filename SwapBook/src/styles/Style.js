@@ -30,6 +30,10 @@ export const styles = StyleSheet.create({
         headerTitleStyle: {
             fontWeight: 'bold',
         },
-      },
+    },
+    buttonStyle: {
+        backgroundColor: '#144D82',
+        color: '#fff'
+    }    
       
 });

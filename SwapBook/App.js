@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator, createAppContainer, createMaterialTopTabNavigator, createSwitchNavigator} from 'react-navigation';
+import { createStackNavigator, createAppContainer, createMaterialTopTabNavigator, createSwitchNavigator, createBottomTabNavigator} from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Logo from './src/components/Logo';
 
@@ -15,41 +15,48 @@ const DashboardTabNavigator = createMaterialTopTabNavigator(
   {
     Home: {
       screen: HomeScreen,
-      tabBarLabel: 'Home',
-      tabBarIcon:() => (
-        <Icon name='ios-home' color={'#000'} size={24}/>
-      ) ,
+      navigationOption: {
+        tabBarLabel: 'Home',
+        tabBarIcon:({tintColor}) => {
+          return <Icon name={'ios-home'} color={tintColor} size={20}/>
+       } ,
+      }
+     
     },
     Profile: {
       screen: ProfileScreen,
-      tabBarLabel: 'Profile',
-      tabBarIcon:({tintColor}) => (
-        <Icon name='account-circle' color={tintColor} size={24}/>
-      ) , 
+      navigationOption: {
+        tabBarLabel: 'Profile',
+        tabBarIcon:({tintColor}) => {
+          return <Icon name={'ios-person'} color={'#fff'} size={20}/>
+       } ,
+      }
     },
     AddBook: {
       screen: AddBookScreen,
-      tabBarLabel: 'AddBook',
-      tabBarIcon:({tintColor}) => (
-        <Icon name='add-circle' color={tintColor} size={24}/>
-      ) ,
+      navigationOption: {
+        tabBarLabel: 'AddBook',
+        tabBarIcon:({tintColor}) => {
+          return <Icon name={'ios-add-circle'} color={"#000"} size={20}/>
+       } ,
+      }    
     }, 
   },
-
-  {
+  { 
     initialRouteName: 'Home',
     order: ['Profile', 'Home', 'AddBook'],
     tabBarPosition: 'bottom',
     tabBarOptions:{
+      showIcon: true,
+      showLabel:false,
       activeTintColor: 'orange',
       inactiveTintColor: '#f2f2f2',
       style: {
-        backgroundColor: '#164050',
+        backgroundColor: '#0BB586',
       },
       indicatorStyle: {
         height: 0,
       },
-      showIcon: true,
     },
   }, 
 );
