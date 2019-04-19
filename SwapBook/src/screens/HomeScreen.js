@@ -2,9 +2,9 @@ import React from 'react';
 import { Text, View, Button, SafeAreaView } from 'react-native';
 import {Header} from 'react-native-elements';
 import Logo from '../components/Logo';
-import Icon from 'react-native-vector-icons/Ionicons';
+//import Icon from 'react-native-vector-icons/Ionicons';
 import { styles } from '../styles/Style';
-
+import {Ionicons} from '@expo/vector-icons'
 
 //Home  --  show books
 export default class HomeScreen extends React.Component{  
@@ -37,9 +37,9 @@ export default class HomeScreen extends React.Component{
       {/*<Text>Count: {this.state.count}</Text> */}
       
       {/*test icons*/}
-      <Icon name='ios-home' color={'#000'} size={24}/>
-      <Icon name='person' color={'#000'} size={24}/>
-      <Icon name='add-circle-outline' color={'#000'} size={24}/>
+      <Ionicons name='home' color={'#000'} size={24}/>
+      <Ionicons name='user' color={'#000'} size={24}/>
+      <Ionicons name='pluscircle' color={'#000'} size={24}/>
       {/*This will be a list of books, when clicked, info of the book will be shown*/}
       <Button title="Boek X" onPress={() => this.props.navigation.navigate('SellerProfile' , {itemId: 86, otherParam: 'more info user'})}  color='#eee'/>
       <Button title="Ad A Book" onPress={() => this.props.navigation.navigate('AddBook')}/>

@@ -13,7 +13,7 @@ export default class WelcomeScreen extends React.Component{
           title="Login"
           onPress={() => this.props.navigation.navigate('Tabnav')}
         />
-        <Button title="Sign Up" onPress={() => alert('button pressed')} />
+        <Button title="Register" onPress={() => this.props.navigation.navigate('Register')}/>
       </View>
     )
   }
