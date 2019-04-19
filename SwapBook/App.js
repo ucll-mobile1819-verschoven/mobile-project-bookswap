@@ -15,29 +15,29 @@ const DashboardTabNavigator = createMaterialTopTabNavigator(
   {
     Home: {
       screen: HomeScreen,
-      navigationOption: {
-        tabBarLabel: 'Home',
+      navigationOptions : {
+     //   tabBarLabel: 'Home',
         tabBarIcon:({tintColor}) => {
-          return <Icon name={'ios-home'} color={tintColor} size={20}/>
+          return (<Icon name="ios-home" color={tintColor} size={30}/>)
        } ,
       }
      
     },
     Profile: {
       screen: ProfileScreen,
-      navigationOption: {
-        tabBarLabel: 'Profile',
+      navigationOptions : {
+       // tabBarLabel: 'Profile',
         tabBarIcon:({tintColor}) => {
-          return <Icon name={'ios-person'} color={'#fff'} size={20}/>
+          return (<Icon name={'ios-person'} color={tintColor} size={30}/>)
        } ,
       }
     },
     AddBook: {
       screen: AddBookScreen,
-      navigationOption: {
-        tabBarLabel: 'AddBook',
+      navigationOptions : {
+      //  tabBarLabel: 'AddBook',
         tabBarIcon:({tintColor}) => {
-          return <Icon name={'ios-add-circle'} color={"#000"} size={20}/>
+          return (<Icon name={'ios-add-circle'} color={tintColor} size={30}/>)
        } ,
       }    
     }, 
@@ -47,8 +47,7 @@ const DashboardTabNavigator = createMaterialTopTabNavigator(
     order: ['Profile', 'Home', 'AddBook'],
     tabBarPosition: 'bottom',
     tabBarOptions:{
-      showIcon: true,
-      showLabel:false,
+      
       activeTintColor: 'orange',
       inactiveTintColor: '#f2f2f2',
       style: {
@@ -57,6 +56,8 @@ const DashboardTabNavigator = createMaterialTopTabNavigator(
       indicatorStyle: {
         height: 0,
       },
+      showIcon: true,
+      showLabel:false,
     },
   }, 
 );

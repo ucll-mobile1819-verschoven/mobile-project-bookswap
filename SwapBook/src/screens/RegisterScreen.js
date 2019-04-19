@@ -9,7 +9,7 @@ export default class Registerscreen extends React.Component{
     return(
       <View>
         <Header leftComponent={ <Logo/> } centerComponent={{ text: 'Register', style: { color: '#fff' } }} containerStyle={{backgroundColor:'#0BB586'}}/>
-        <Button title="Register" onPress={() => alert('button pressed')} color="#144D82"/>
+        <Button title="Register" onPress={() => alert('button pressed')} color="#0BB586"/>
         <Button title="Back" onPress={() => this.props.navigation.navigate('Welcome')} color="#0BB586"/>
      
       </View>
