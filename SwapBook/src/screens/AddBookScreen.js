@@ -5,10 +5,6 @@ import { styles } from '../styles/Style';
 import Logo from '../components/Logo';
 
 export default class AddBookScreen extends React.Component {
-    static navigationOptions = {
-      title: 'Add A Book',
-    };
-  
     render() {
       return (
         <View style={{backgroundColor: '#eee'}}>

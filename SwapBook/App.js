@@ -51,18 +51,6 @@ const DashboardTabNavigator = createMaterialTopTabNavigator(
       showIcon: true,
     },
   }, 
-    {//finds and returns name but doesn't want to mix with the other settings
- navigationOptions: ({navigation}) => {
-  const{ routeName} = navigation.state.routes[navigation.state.index];
-  console.log(routeName);
-  return {
-    headerTitle: routeName,
-    headerLeft: (
-      <Logo/>
-    )
-  };
-}
-},
 );
 
 
@@ -80,24 +68,6 @@ const RootStack = createStackNavigator(
     mode: 'modal',
     headerMode: 'none',
   },
-  {
-    navigationOptions: ({navigation}) => {
-      const{ routeName} = navigation.state.routes[navigation.state.index];
-      //console.log(routeName);
-      return {
-        headerTitle: routeName,
-        headerLeft: (
-          <Logo/>
-        )
-      }  
-    },
-  },
-  {
-    navigationOptions: () => ({
-      headerTitle: <Logo/>,
-  })
-  }
-
 );
 
 
@@ -120,36 +90,3 @@ export default class App extends React.Component {
     )
   }
 }
-
-
-
-
-/*
-//stacknav
-const MainStack = createStackNavigator(
-  
-  {
-    Home: {
-      screen: HomeScreen,
-    },
-    Profile: {
-      screen: ProfileScreen,
-    },
-    AddBook: {
-      screen: AddBookScreen,
-    }, 
-  },
-  {
-    initialRouteName: "Home",
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: '#164050',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    },
-  },
-  
-);*/

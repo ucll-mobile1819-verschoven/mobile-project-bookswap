@@ -8,15 +8,16 @@ import { styles } from '../styles/Style';
 
 //Home  --  show books
 export default class HomeScreen extends React.Component{  
-  static navigationOptions = ({navigation}) => {
-    const params = navigation.state.params || {};
-    return {
-      headerTitle: <Logo/>,
+ // static navigationOptions = ({navigation}) => {
+ //   const params = navigation.state.params || {};
+   // return {
+
+      //in comments voorbeeld voor params mee te geven
     /*  headerRight: (
         <Button onPress={params.increaseCount} title="+1" color="#eee" />
       ),*/
-    }
-  };
+  //  }
+ // };
 
   /*componentWillMount() {
     this.props.navigation.setParams({ increaseCount: this._increaseCount });

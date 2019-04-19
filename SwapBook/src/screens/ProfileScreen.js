@@ -6,18 +6,18 @@ import { styles } from '../styles/Style';
 
 
 export default class ProfileScreen extends React.Component {
-    static navigationOptions = ({ navigation, navigationOptions }) => {
-      const { params } = navigation.state;
+   // static navigationOptions = ({ navigation, navigationOptions }) => {
+    //  const { params } = navigation.state;
   
-      return {
+    //  return {
         //not gonna need nested
-        title: params ? params.otherParam: 'Profile',
+        //title: params ? params.otherParam: 'Profile',
        // headerStyle: {
        //   backgroundColor: navigationOptions.headerTintColor,
       //  },
       //  headerTintColor: navigationOptions.headerStyle.backgroundColor,
-      };
-    };
+      //};
+   // };
     render() {
       return (
         <View>
