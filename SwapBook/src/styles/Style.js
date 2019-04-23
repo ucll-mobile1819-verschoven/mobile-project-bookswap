@@ -11,6 +11,8 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     mapContainer: {
+        flex: 1,
+        position:"relative",
         width: '100%',
         height: 150,
         marginTop: 20

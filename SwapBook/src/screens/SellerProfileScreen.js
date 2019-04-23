@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View, Button, ScrollView } from 'react-native';
 import Location from '../components/Location';
 import {Header} from 'react-native-elements';
 import Logo from '../components/Logo';
+import Icon from 'react-native-vector-icons/Ionicons'
 import { styles } from '../styles/Style';
 //modal -- "popup"  When cliking on a book it will show the info of the seller
 export default class SellerProfileScreen extends React.Component {
@@ -22,8 +23,9 @@ export default class SellerProfileScreen extends React.Component {
     const otherParam = params ? params.otherParam : null;
     return (
       <View>
-        <Header leftComponent={ <Logo/> } centerComponent={{ text: 'Info Book', style: { color: '#fff' } }} containerStyle={{backgroundColor:'#0BB586'}}/>
-        <Button onPress={()=> this.props.navigation.goBack()} title='Go Back' color="#0BB586"/>
+        <Header leftComponent={ <Icon name="ios-arrow-back" color={'#fff'} size={30} onPress={()=> this.props.navigation.goBack()} title='Go Back'/> } 
+                centerComponent={{ text: 'Info Book', style: { color: '#fff' } }} 
+                containerStyle={{backgroundColor:'#0BB586'}}/>        
         <Text>Info of the seller will be put on this page</Text>
         <Text>itemId: {JSON.stringify(itemId)}</Text>
         <Text>otherParam: {JSON.stringify(otherParam)}</Text>
