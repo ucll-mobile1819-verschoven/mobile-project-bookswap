@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-import {customMapStyle} from './DarkMap';
+//import {customMapStyle} from './DarkMap';
 
 export const styles = StyleSheet.create({
     container: {
@@ -23,16 +23,18 @@ export const styles = StyleSheet.create({
     },
     lightTheme: {
     },
-    darkTheme: {
-        customMapStyle: customMapStyle,
-    },
-    headerStyle: {
-        backgroundColor: '#164050',
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-            fontWeight: 'bold',
-        },
-    },
+    // Dit mag je uitcommenten als dit wel werkt bij jou samen met DarkMap.js!!
+
+    // darkTheme: {
+    //     customMapStyle: customMapStyle,
+    // },
+    // headerStyle: {
+    //     backgroundColor: '#164050',
+    //     // headerTintColor: '#fff',
+    //     headerTitleStyle: {
+    //         fontWeight: 'bold',
+    //     },
+    // },
     buttonStyle: {
         backgroundColor: '#144D82',
         color: '#fff'
