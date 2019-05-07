@@ -1,12 +1,18 @@
 package be.ucll.swapbook.db;
 
 import be.ucll.swapbook.model.Book;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import be.ucll.swapbook.model.User;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 
-@Repository
-public interface BookDb extends JpaRepository<Book, String> {
-
+public interface BookDb {
+    void addBook(Book book);
+    void removeBook(long bookId);
+    void updateBook(long bookId, Book book);
+    Book getBook(long id);
+    ArrayList<Book> getBooksByUserId(long id);
+    Collection<Book> getAllBooks();
 
 }

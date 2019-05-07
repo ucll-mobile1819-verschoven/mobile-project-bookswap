@@ -18,16 +18,12 @@ public class BookController {
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
-/*
-    @GetMapping("{userId}/book")
-    public List<Book> getAllBooksFromUser(@PathVariable String userId) {
+
+    @GetMapping("{userId}/books")
+    public List<Book> getAllBooksFromUser(@PathVariable("userId") long userId) {
         return bookService.getAllBooksByUserId(userId);
     }
-*/
-    @PostMapping("{userId}/book")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createNewFeedback(@RequestBody @Valid Book book, @PathVariable String userId) {
-        book.setBookUserId(userId);
-        bookService.addBook(book);
-    }
+
+
+
 }

@@ -15,7 +15,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    private String userId;
+    private long userId;
 
     @NotNull(message = "Invalid first name")
     @Size(min = 1, max = 30, message = "Invalid first name")
@@ -53,11 +53,11 @@ public class User {
         setPassword(password);
     }
 
-    public String getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 

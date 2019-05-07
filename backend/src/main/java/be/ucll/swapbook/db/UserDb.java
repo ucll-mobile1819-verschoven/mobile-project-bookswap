@@ -1,7 +1,15 @@
 package be.ucll.swapbook.db;
 
 import be.ucll.swapbook.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserDb extends JpaRepository<User, String> {
+import java.util.Collection;
+
+public interface UserDb {
+
+    void addUser(User user);
+    void removeUser(long userId);
+    void updateUser(long userId, User user);
+    User getUserByEmail(String email);
+    User getUser(long userId);
+    Collection<User> getAllUsers();
 }
