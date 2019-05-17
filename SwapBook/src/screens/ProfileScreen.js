@@ -16,6 +16,7 @@ export default class ProfileScreen extends React.Component {
        //   backgroundColor: navigationOptions.headerTintColor,
       //  },
       //  headerTintColor: navigationOptions.headerStyle.backgroundColor,
+      //<Button title="Update the title" onPress={() => this.props.navigation.setParams({otherParam: 'Updated!'}) } color="#0BB586"/>
       };
     };
     render() {
@@ -25,7 +26,7 @@ export default class ProfileScreen extends React.Component {
         
           <Text>Profile Screen</Text>
          
-          <Button title="Update the title" onPress={() => this.props.navigation.setParams({otherParam: 'Updated!'}) } color="#0BB586"/>
+          <Button title="Logout" onPress={() => this.props.navigation.navigate('Welcome') } color="#0BB586"/>
         </View>
   
       );
