@@ -14,7 +14,7 @@ public class Book {
 
     @Id
     @GeneratedValue
-    private String bookId;
+    private long bookId;
 
     @NotNull(message = "Invalid title")
     @Size(min = 1, max = 30, message = "Invalid title")
@@ -30,17 +30,17 @@ public class Book {
 
     @NotNull(message = "Invalid price")
     @DecimalMin(value = "0.0", message = "Price can't be negative")
-    private String price;
+    private double price;
 
     @NotNull(message = "Invalid condition")
     @Size(min = 1, max = 10, message = "Invalid condition")
     private String condition;
 
-    private String bookUserId;
+    private long bookUserId;
 
     public Book() {}
 
-    public Book(String title, String author, String isbn, String price, String condition) {
+    public Book(String title, String author, String isbn, double price, String condition) {
         setTitle(title);
         setAuthor(author);
         setIsbn(isbn);
@@ -49,11 +49,11 @@ public class Book {
         setBookUserId(bookUserId);
     }
 
-    public String getBookId() {
+    public long getBookId() {
         return bookId;
     }
 
-    public void setBookId(String bookId) {
+    public void setBookId(long bookId) {
         this.bookId = bookId;
     }
 
@@ -81,11 +81,11 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -97,11 +97,11 @@ public class Book {
         this.condition = condition;
     }
 
-    public String getBookUserId() {
+    public long getBookUserId() {
         return bookUserId;
     }
 
-    public void setBookUserId(String bookUserId) {
+    public void setBookUserId(long bookUserId) {
         this.bookUserId = bookUserId;
     }
 
