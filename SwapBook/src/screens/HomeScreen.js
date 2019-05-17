@@ -6,6 +6,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { styles } from '../styles/Style';
 import axios from 'axios';
 
+import { db } from '../config/db';
+
+let itemsRef = db.ref('/book');
+
+
 //import {Ionicons} from '@expo/vector-icons'
 
 //Home  --  show books
@@ -36,14 +41,15 @@ export default class HomeScreen extends React.Component{
 
     // Met state kan er data bijgehouden worden binnen het component
     this.state = {
-        data: [],
+        items: [],
     };
 
     // functie initialiseren - alleen bij functies waarvoor this. wordt gebruikt
-    this.loadData = this.loadData.bind(this);
+  //  this.loadData = this.loadData.bind(this);
+    //this.getAllBooks = this.getAllBooks.bind(this);
 
 }
-
+/*
 loadData() {
     // GET request naar de URL returned een lijst van students in een classgroup
     
@@ -59,27 +65,37 @@ loadData() {
             });
         });
 }
-
+*/
 // Standaard functie
 // wordt uitgevoerd bij het inladen van het component
 componentDidMount() {
-    this.loadData();
+    itemsRef.on('value', (snapshot) => {
+      let data = snapshot.val();
+      let items = Object.values(data);
+      this.setState({items});
+    })
 }
-
+/*
+getAllBooks = () => {
+  fetch('https://swapbook-2403f.firebaseio.com/book.json')
+  .then(response => response.json)
+  .then(parsedResponse => {
+    
+    this.setState({
+      data: parsedResponse
+    });
+  })
+  .catch(err => console.log(err));
+}*/
   render(){
     return(
       <View style={styles.centered}>
       <Header leftComponent={ <Logo/> } centerComponent={{ text: 'SwapBook', style: { color: '#fff',}}} containerStyle={{backgroundColor:'#0BB586'}}/>
       <Button title="Logout" onPress={() => this.props.navigation.navigate('Welcome')} color="#0BB586" />
-
-      {this.state.data.map((row, key) => {
-                            return (
-                                
-                              <Button title={row.title} onPress={() => this.props.navigation.navigate('SellerProfile' , {itemId: 86, otherParam: 'more info user'})} color="#0BB586" />
-      
-                                
-                            )
-                        })}
+      {this.state.items.length > 0
+      ? <Button title={this.state.items[0].title}/> 
+    : <Text> No books </Text>}
+    
       <Button title="Boek X" onPress={() => this.props.navigation.navigate('SellerProfile' , {itemId: 86, otherParam: 'more info user'})} color="#0BB586" />
       <Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook')} color="#0BB586"/>
       </View>
