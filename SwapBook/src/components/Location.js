@@ -21,8 +21,8 @@ export default class Location extends React.Component{
           userLocation: {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
+            latitudeDelta: 1.0,
+            longitudeDelta: 1.0,
           }
         });
         //SET location seller of book         => Will need it with making an acount

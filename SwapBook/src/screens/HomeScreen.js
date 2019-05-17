@@ -70,9 +70,7 @@ componentDidMount() {
     return(
       <View style={styles.centered}>
       <Header leftComponent={ <Logo/> } centerComponent={{ text: 'SwapBook', style: { color: '#fff',}}} containerStyle={{backgroundColor:'#0BB586'}}/>
-      <Text>Home Screen</Text>
-      {/*<Text>Count: {this.state.count}</Text> */}
-      {/*This will be a list of books, when clicked, info of the book will be shown*/}
+      <Button title="Logout" onPress={() => this.props.navigation.navigate('Welcome')} color="#0BB586" />
 
       {this.state.data.map((row, key) => {
                             return (
