@@ -7,6 +7,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import SellerProfileScreen from './src/screens/SellerProfileScreen';
+import BookScreen from './src/screens/BookScreen';
 import AddBookScreen from './src/screens/AddBookScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 
@@ -68,6 +69,9 @@ const RootStack = createStackNavigator(
   {
     Main: {
       screen : DashboardTabNavigator,
+    },
+    BookScreen: {
+      screen: BookScreen,
     },
     SellerProfile: {
       screen: SellerProfileScreen,
