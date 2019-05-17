@@ -62,7 +62,11 @@ export const styles = StyleSheet.create({
          borderColor:'#0BB586',
           borderRadius:5,
            margin:5,
-            padding: 5
+            padding: 5,
+    },
+    books:{
+        marginTop:5,
+        paddingTop: 5,
     }
       
 });
