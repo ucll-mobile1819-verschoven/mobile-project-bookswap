@@ -90,15 +90,31 @@ getAllBooks = () => {
   render(){
     return(
       <View style={styles.centered}>
-      <Header leftComponent={ <Logo/> } centerComponent={{ text: 'SwapBook', style: { color: '#fff',}}} containerStyle={{backgroundColor:'#0BB586'}}/>
-      <Button title="Logout" onPress={() => this.props.navigation.navigate('Welcome')} color="#0BB586" />
-      {this.state.items.length > 0
-      ? <Button title={this.state.items[0].title}/> 
-    : <Text> No books </Text>}
-    
-      <Button title="Boek X" onPress={() => this.props.navigation.navigate('SellerProfile' , {itemId: 86, otherParam: 'more info user'})} color="#0BB586" />
-      <Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook')} color="#0BB586"/>
+        <Header leftComponent={ <Logo/> } centerComponent={{ text: 'SwapBook', style: { color: '#fff',}}} containerStyle={{backgroundColor:'#0BB586'}}/>
+          <Button title="Logout" onPress={() => this.props.navigation.navigate('Welcome')} color="#0BB586" />
+          {this.state.items.length > 0
+          ? <Button title={this.state.items[0].title}/> 
+        : <Text> No books </Text>}
+        
+          <Button title="Boek X" onPress={() => this.props.navigation.navigate('SellerProfile' , {itemId: 86, otherParam: 'more info user'})} color="#0BB586" />
+          <Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook')} color="#0BB586"/>
       </View>
     )
   }
 };
+
+//layout for loop of books
+/*<View>
+
+          {this.state.data.map((row, key) => {
+                                return (
+                                  <View style={styles.books} key={"view" + key}>
+                                    <Button title={row.title} key={key} onPress={() => this.props.navigation.navigate('SellerProfile' , {itemId: 86, otherParam: 'more info user'})} color="#0BB586" />
+                                  </View>
+                                    
+                                )
+                            })}
+          <View style={{margin: 10, padding: 10}}><Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook')} color="#FFA71A"/></View>
+          
+        </View>
+*/
