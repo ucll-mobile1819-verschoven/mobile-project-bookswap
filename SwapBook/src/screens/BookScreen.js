@@ -39,7 +39,7 @@ export default class BookScreen extends React.Component {
         <Text>Price</Text>
         
 
-        <Button title='seller' onPress={() => this.props.navigation.navigate('SellerProfile', {sellerId:  }) } color="#0BB586"/>
+        <Button title='seller' onPress={() => this.props.navigation.navigate('SellerProfile', {sellerId:  "ID OF SELLER"}) } color="#0BB586"/>
       </View>
     );
   }
