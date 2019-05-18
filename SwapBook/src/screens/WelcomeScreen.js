@@ -1,8 +1,9 @@
 import React from 'react';
-import { Text, View, Button } from 'react-native';
+import { View, Button, Text } from 'react-native';
 import {Header} from 'react-native-elements';
 import { styles } from '../styles/Style';
 import Logo from '../components/Logo';
+import { TextInput } from 'react-native-paper';
 
 export default class WelcomeScreen extends React.Component{  
   render(){
@@ -20,7 +21,7 @@ export default class WelcomeScreen extends React.Component{
        <View  style={styles.border}>
        {/*<Text style={{display}}>{JSON.stringify(success)}</Text>*/}
        <View style={{display}}><Button title="Great job! You can now login!" onPress={() => this.props.navigation.navigate('Tabnav')} color='#0BB586' backgroundColor='transparant'/></View>
-       
+
         <Button
           title="Login"
           onPress={() => this.props.navigation.navigate('Tabnav')}

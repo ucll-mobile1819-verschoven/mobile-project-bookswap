@@ -5,6 +5,9 @@ import { styles } from '../styles/Style';
 import Logo from '../components/Logo';
 import t from 'tcomb-form-native';
 
+import { db } from '../config/db';
+
+let itemsRef = db.ref('seller/');
 
 const Form = t.form.Form;
 
@@ -41,9 +44,27 @@ export default class Registerscreen extends React.Component{
     const value = this._form.getValue(); // use that ref to get the form value
     console.log('value: ', value);
     if (value!=null){
+      this.writeUserData("User.email", "User.firstname", "User.lastname", "User.password", "User.residence")
       this.props.navigation.navigate('Welcome', {success: 'Great job! You can now login!'});
     }
   }
+
+  writeUserData(email, firstname, lastname, password, residence){
+    itemsRef.push({
+      email,
+      firstname,
+      lastname,
+      password,
+      residence
+    }).then((data)=>{
+        //success callback
+        console.log('data ' , data)
+    }).catch((error)=>{
+        //error callback
+        console.log('error ' , error)
+    })
+}
+
   render(){
     return(
       <KeyboardAvoidingView style={styles.center} style={styles.container} behavior="padding" enabled>
