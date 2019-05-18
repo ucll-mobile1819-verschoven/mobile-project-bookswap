@@ -6,7 +6,28 @@ import Logo from '../components/Logo';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { styles } from '../styles/Style';
 
+import { db } from '../config/db';
+
+let itemsRef = db.ref('/seller');
+
 export default class SellerProfileScreen extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+        items: [],
+    };
+  }
+
+  componentDidMount() {
+    itemsRef.on('value', (snapshot) => {
+      let data = snapshot.val();
+      let items = Object.values(data);
+      this.setState({items});
+    })
+}
+
+
   static navigationOptions = {
     headerStyle: {
       backgroundColor: '#164050',
@@ -31,6 +52,10 @@ export default class SellerProfileScreen extends React.Component {
         <Text>otherParam: {JSON.stringify(otherParam)}</Text>
         <Text>Name Seller</Text>
         <Text>email seller</Text>
+
+        {this.state.items.length > 0
+          ? <Button title={this.state.items[0].title} onPress={() => this.props.navigation.navigate('BookScreen', {title: this.state.items[0].title })}/> 
+        : <Text> No books </Text>}
         <Location />
       </View>
     );

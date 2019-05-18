@@ -92,10 +92,10 @@ getAllBooks = () => {
       <View style={styles.centered}>
         <Header leftComponent={ <Logo/> } centerComponent={{ text: 'SwapBook', style: { color: '#fff',}}} containerStyle={{backgroundColor:'#0BB586'}}/>
           {this.state.items.length > 0
-          ? <Button title={this.state.items[0].title} onPress={() => this.props.navigation.navigate('BookScreen')}/> 
+          ? <Button title={this.state.items[0].title} onPress={() => this.props.navigation.navigate('BookScreen', {title: this.state.items[0].title })}/> 
         : <Text> No books </Text>}
         
-          <Button title="Boek X" onPress={() => this.props.navigation.navigate('BookScreen' , {itemId: 86, otherParam: 'more info user'})} color="#0BB586" />
+          <Button title="Boek X" onPress={() => this.props.navigation.navigate('BookScreen' , {itemId: 86, otherParam: 'more info user', title: 'X'})} color="#0BB586" />
           <Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook')} color="#0BB586"/>
       </View>
     )

@@ -3,8 +3,13 @@ import { Text, View, Button, ScrollView } from 'react-native';
 import {Header} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { styles } from '../styles/Style';
-//modal -- "popup"  When cliking on a book it will show the info of the seller
+
+
 export default class BookScreen extends React.Component {
+  
+ 
+
+
   static navigationOptions = {
     headerStyle: {
       backgroundColor: '#164050',
@@ -14,11 +19,13 @@ export default class BookScreen extends React.Component {
       fontWeight: 'bold',
     },
     title: 'Book',
+    //here get all data of the book by the id of the book???
   };
   render(){
     const { params } = this.props.navigation.state;
     const itemId = params ? params.itemId : null;
     const otherParam = params ? params.otherParam : null;
+    const title = params ? params.title : null;
     return (
       <View>
         <Header leftComponent={ <Icon name="ios-arrow-back" color={'#fff'} size={30} onPress={()=> this.props.navigation.goBack()} title='Go Back'/> } 
@@ -30,8 +37,12 @@ export default class BookScreen extends React.Component {
         <Text>Name Book</Text>
         <Text>Name of the Seller</Text>
         <Text>Price</Text>
-        <Button title="Seller" onPress={() => this.props.navigation.navigate('SellerProfile') } color="#0BB586"/>
+        
+
+        <Button title='seller' onPress={() => this.props.navigation.navigate('SellerProfile', {sellerId:  }) } color="#0BB586"/>
       </View>
     );
   }
 }
+
+//in seller button give the seller of this book with it
