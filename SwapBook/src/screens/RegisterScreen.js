@@ -44,7 +44,7 @@ export default class Registerscreen extends React.Component{
     const value = this._form.getValue(); // use that ref to get the form value
     console.log('value: ', value);
     if (value!=null){
-      this.writeUserData("User.email", "User.firstname", "User.lastname", "User.password", "User.residence")
+      this.writeUserData(value.email, value.firstname, value.lastname, value.password, value.residence)
       this.props.navigation.navigate('Welcome', {success: 'Great job! You can now login!'});
     }
   }
