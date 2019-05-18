@@ -35,7 +35,7 @@ const options = {
     },
     password: {
       password: true,
-secureTextEntry: true,
+      secureTextEntry: true,
       error: 'Choose something you use on a dozen other sites or something you won\'t remember.'
     },
   }
