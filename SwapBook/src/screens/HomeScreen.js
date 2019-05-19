@@ -15,6 +15,7 @@ let itemsRef = db.ref('/book');
 
 //Home  --  show books
 export default class HomeScreen extends React.Component{  
+  
  // static navigationOptions = ({navigation}) => {
  //   const params = navigation.state.params || {};
    // return {
@@ -69,12 +70,13 @@ loadData() {
 // Standaard functie
 // wordt uitgevoerd bij het inladen van het component
 componentDidMount() {
-    itemsRef.on('value', (snapshot) => {
-      let data = snapshot.val();
-      let items = Object.values(data);
-      this.setState({items});
-    })
+  itemsRef.on('value', (snapshot) => {
+    let data = snapshot.val();
+    let items = Object.values(data);
+    this.setState({items});
+  })
 }
+
 /*
 getAllBooks = () => {
   fetch('https://swapbook-2403f.firebaseio.com/book.json')
@@ -92,10 +94,10 @@ getAllBooks = () => {
       <View style={styles.centered}>
         <Header leftComponent={ <Logo/> } centerComponent={{ text: 'SwapBook', style: { color: '#fff',}}} containerStyle={{backgroundColor:'#0BB586'}}/>
           {this.state.items.length > 0
-          ? <Button title={this.state.items[0].title} onPress={() => this.props.navigation.navigate('BookScreen', {title: this.state.items[0].title })}/> 
+          ? <Button title={this.state.items[0].title} onPress={() => this.props.navigation.navigate('BookScreen', {title: this.state.items[0].title, sellerId: this.state.items[0].sellerId })}/> 
         : <Text> No books </Text>}
         
-          <Button title="Boek X" onPress={() => this.props.navigation.navigate('BookScreen' , {itemId: 86, otherParam: 'more info user', title: 'X'})} color="#0BB586" />
+          <Button title="Boek X" onPress={() => this.props.navigation.navigate('BookScreen' , {itemId: 86, otherParam: 'more info user', title: 'X', sellerId: 'Y'})} color="#0BB586" />
           <Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook')} color="#0BB586"/>
       </View>
     )

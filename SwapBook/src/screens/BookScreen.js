@@ -19,6 +19,7 @@ export default class BookScreen extends React.Component {
       fontWeight: 'bold',
     },
     title: 'Book',
+    
     //here get all data of the book by the id of the book???
   };
   render(){
@@ -26,6 +27,7 @@ export default class BookScreen extends React.Component {
     const itemId = params ? params.itemId : null;
     const otherParam = params ? params.otherParam : null;
     const title = params ? params.title : null;
+    const sellerId = params ? params.sellerId : null;
     return (
       <View>
         <Header leftComponent={ <Icon name="ios-arrow-back" color={'#fff'} size={30} onPress={()=> this.props.navigation.goBack()} title='Go Back'/> } 
@@ -34,12 +36,14 @@ export default class BookScreen extends React.Component {
         <Text>Info of the seller will be put on this page</Text>
         <Text>itemId: {JSON.stringify(itemId)}</Text>
         <Text>otherParam: {JSON.stringify(otherParam)}</Text>
+        <Text>Title Book: {JSON.stringify(title)}</Text>
+        <Text>Seller Id: {JSON.stringify(sellerId)}</Text>
         <Text>Name Book</Text>
         <Text>Name of the Seller</Text>
         <Text>Price</Text>
         
 
-        <Button title='seller' onPress={() => this.props.navigation.navigate('SellerProfile', {sellerId:  "ID OF SELLER"}) } color="#0BB586"/>
+        <Button title='seller' onPress={() => this.props.navigation.navigate('SellerProfile', {sellerId:  sellerId}) } color="#0BB586"/>
       </View>
     );
   }
