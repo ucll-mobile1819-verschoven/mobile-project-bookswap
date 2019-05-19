@@ -67,13 +67,26 @@ export default class SellerProfileScreen extends React.Component {
                 containerStyle={{backgroundColor:'#0BB586'}}/>        
         <Text>Info of the seller will be put on this page</Text>
         <Text>sellerId: {JSON.stringify(sellerId)}</Text>
-        <Text>First Name: {this.state.items[0].firstname}</Text>
-        <Text>Last Name: {this.state.items[0].lastname}</Text>
-        <Text>Email: {this.state.items[0].email}</Text>
-        <Text>Residence: {this.state.items[0].residence}</Text>
+        {this.state.items.length > 0
+          ? <Text>First Name: {this.state.items[0].firstname}</Text>
+          : <Text> No First Name </Text>
+        }
+        {this.state.items.length > 0
+          ? <Text>Last Name: {this.state.items[0].lastname}</Text>
+          : <Text> No Last Name </Text>
+        }
+        {this.state.items.length > 0
+          ? <Text>Email: {this.state.items[0].email}</Text>
+          : <Text> No Email </Text>
+        }
+        {this.state.items.length > 0
+          ? <Text>Residence: {this.state.items[0].residence}</Text>
+          : <Text> No Residence </Text>
+        }
 
         <Location />
       </View>
     );
   }
 }
+
