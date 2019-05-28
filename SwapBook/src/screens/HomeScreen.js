@@ -67,55 +67,36 @@ loadData() {
         });
 }
 */
-// Standaard functie
-// wordt uitgevoerd bij het inladen van het component
+
+
+//GET BOOKS
 componentDidMount() {
   itemsRef.on('value', (snapshot) => {
     let data = snapshot.val();
     let items = Object.values(data);
+    //console.log(items);
     this.setState({items});
   })
 }
 
-/*
-getAllBooks = () => {
-  fetch('https://swapbook-2403f.firebaseio.com/book.json')
-  .then(response => response.json)
-  .then(parsedResponse => {
-    
-    this.setState({
-      data: parsedResponse
-    });
-  })
-  .catch(err => console.log(err));
-}*/
   render(){
+    //BOOK LOOP
+    var books = [];
+    for (let i=0; i< this.state.items.length; i++){
+        books.push(
+            <View style={styles.books} key={"book" + i}>
+              <Button color="#0BB586" title={this.state.items[i].title} onPress={() => this.props.navigation.navigate('BookScreen', {title: this.state.items[i].title, sellerId: this.state.items[i].sellerId })}/>
+            </View>
+        )
+    }
     return(
       <View style={styles.centered}>
         <Header leftComponent={ <Logo/> } centerComponent={{ text: 'SwapBook', style: { color: '#fff',}}} containerStyle={{backgroundColor:'#0BB586'}}/>
-          {this.state.items.length > 0
-          ? <Button title={this.state.items[0].title} onPress={() => this.props.navigation.navigate('BookScreen', {title: this.state.items[0].title, sellerId: this.state.items[0].sellerId })}/> 
-        : <Text> No books </Text>}
-        
-          <Button title="Boek X" onPress={() => this.props.navigation.navigate('BookScreen' , {itemId: 86, otherParam: 'more info user', title: 'X', sellerId: 'Y'})} color="#0BB586" />
-          <Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook')} color="#0BB586"/>
+          <View style={{marginBottom: 5, paddingBottom: 5}}>{ books}</View>
+            
+
+            <Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook')} color="#BFFF00" style={styles.books}/>
       </View>
     )
   }
 };
-
-//layout for loop of books
-/*<View>
-
-          {this.state.data.map((row, key) => {
-                                return (
-                                  <View style={styles.books} key={"view" + key}>
-                                    <Button title={row.title} key={key} onPress={() => this.props.navigation.navigate('BookScreen' , {itemId: 86, otherParam: 'more info user'})} color="#0BB586" />
-                                  </View>
-                                    
-                                )
-                            })}
-          <View style={{margin: 10, padding: 10}}><Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook')} color="#FFA71A"/></View>
-          
-        </View>
-*/

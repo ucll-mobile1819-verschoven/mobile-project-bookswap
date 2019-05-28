@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { styles } from '../styles/Style';
 import { db } from '../config/db';
 
-let itemsRef = db.ref('/seller');
+
 
 
 export default class SellerProfileScreen extends React.Component {
@@ -28,20 +28,27 @@ export default class SellerProfileScreen extends React.Component {
         items: [],
     };
   };
-  componentDidMount() {
-    const { params } = this.props.navigation.state;
-    const sellerId = params ? params.sellerId : null;
+  componentDidMount(){
+  //getUser(sellerId) {
+    
+   // console.log(reference);
+   const { params } = this.props.navigation.state;
+  const sellerId = params ? params.sellerId : null;
+  let reference = '/seller/' + sellerId;
+    let itemsRef = db.ref(reference);
     itemsRef.on('value', (snapshot) => {
       //Object with keys
       let data = snapshot.val();
       //Value of objects
       let items = Object.values(data);
       //object Keys
-      let ids = Object.keys(data);
+      //let ids = Object.keys(data);
 
      //let key = ids.find(sellerId);
     //console.log(key);
-      console.log(items);
+      console.log(data);
+      //console.log(items);
+      //console.log(ids);
       this.setState({items});
     })
   }
@@ -57,30 +64,31 @@ export default class SellerProfileScreen extends React.Component {
     title: 'Book',
   };
   render(){
-    const { params } = this.props.navigation.state;
-    const sellerId = params ? params.sellerId : null;
+    //const { params } = this.props.navigation.state;
+    //const sellerId = params ? params.sellerId : null;
     //this.getUser(sellerId);
+   // <Text>sellerId: {JSON.stringify(sellerId)}</Text>
     return (
       <View>
         <Header leftComponent={ <Icon name="ios-arrow-back" color={'#fff'} size={30} onPress={()=> this.props.navigation.goBack()} title='Go Back'/> } 
                 centerComponent={{ text: 'Info Seller', style: { color: '#fff' } }} 
                 containerStyle={{backgroundColor:'#0BB586'}}/>        
         <Text>Info of the seller will be put on this page</Text>
-        <Text>sellerId: {JSON.stringify(sellerId)}</Text>
+        
         {this.state.items.length > 0
-          ? <Text>First Name: {this.state.items[0].firstname}</Text>
+          ? <Text>First Name: {this.state.items[1]}</Text>
           : <Text> No First Name </Text>
         }
         {this.state.items.length > 0
-          ? <Text>Last Name: {this.state.items[0].lastname}</Text>
+          ? <Text>Last Name: {this.state.items[2]}</Text>
           : <Text> No Last Name </Text>
         }
         {this.state.items.length > 0
-          ? <Text>Email: {this.state.items[0].email}</Text>
+          ? <Text>Email: {this.state.items[0]}</Text>
           : <Text> No Email </Text>
         }
         {this.state.items.length > 0
-          ? <Text>Residence: {this.state.items[0].residence}</Text>
+          ? <Text>Residence: {this.state.items[4]}</Text>
           : <Text> No Residence </Text>
         }
 

@@ -67,7 +67,7 @@ export const styles = StyleSheet.create({
     books:{
         marginTop:5,
         paddingTop: 5,
-    }
+    },
       
 });
 
