@@ -10,8 +10,10 @@ export default class LoginScreen extends React.Component {
 
   handleLogin = () => {
     for (let user of this.state.users) {
+      //TODO: pass sellerId property to homescreen 
         if (this.state.email == user.email && this.state.password == user.password) {
-          //TODO - Successfull login
+          this.props.navigation.navigate('Home', {sellerId: user.sellerId});
+          break;
         } else {
         this.state.errorMessage= "Incorrect email or password";
         }

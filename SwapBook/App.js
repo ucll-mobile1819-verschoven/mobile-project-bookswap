@@ -88,6 +88,7 @@ const RootStack = createStackNavigator(
 const SwitchNavigator = createSwitchNavigator({
   Welcome: {screen: WelcomeScreen},
   Tabnav: {screen: RootStack},
+  Home: {screen: HomeScreen},
   Login: {screen: LoginScreen},
   Register: {screen: RegisterScreen}
 },
