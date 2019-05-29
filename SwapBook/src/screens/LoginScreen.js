@@ -12,19 +12,17 @@ export default class LoginScreen extends React.Component {
     for (let user of this.state.users) {
       //TODO: pass sellerId property to homescreen 
         if (this.state.email == user.email && this.state.password == user.password) {
-          this.props.navigation.navigate('Home', {sellerId: user.sellerId});
+          this.props.navigation.navigate('Home', {sellerId: user.email});
           break;
         } else {
         this.state.errorMessage= "Incorrect email or password";
         }
     }
-    console.debug(this.state.errorMessage);
   }
 
   componentDidMount() {
     usersRef.on('value', (snapshot) => {
       let data = snapshot.val();
-      console.debug(data);
       let users = Object.values(data);
       this.setState({ users });
     });

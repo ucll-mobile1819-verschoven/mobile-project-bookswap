@@ -80,9 +80,8 @@ componentDidMount() {
 }
 
   render(){
-    const { params } = this.props.navigation.state;
-    const sellerId = params ? params.sellerId : null;
-    console.debug(sellerId);
+    const sellerId =this.props.navigation.getParam('sellerId');
+    
     //BOOK LOOP
     var books = [];
     for (let i=0; i< this.state.items.length; i++){
@@ -96,7 +95,7 @@ componentDidMount() {
       <View style={styles.centered}>
         
         <Header leftComponent={ <Logo/> } centerComponent={{ text: 'SwapBook', style: { color: '#fff',}}} containerStyle={{backgroundColor:'#0BB586'}}/>
-        <Text>Hallo {sellerId}</Text>
+        <Text>You are logged in as {sellerId} </Text>
           <View style={{marginBottom: 5, paddingBottom: 5}}>{ books}</View>
             
 
