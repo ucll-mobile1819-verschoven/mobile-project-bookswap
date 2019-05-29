@@ -10,6 +10,7 @@ import SellerProfileScreen from './src/screens/SellerProfileScreen';
 import BookScreen from './src/screens/BookScreen';
 import AddBookScreen from './src/screens/AddBookScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
+import LoginScreen from './src/screens/LoginScreen';
 
 
 const DashboardTabNavigator = createMaterialTopTabNavigator(
@@ -87,6 +88,7 @@ const RootStack = createStackNavigator(
 const SwitchNavigator = createSwitchNavigator({
   Welcome: {screen: WelcomeScreen},
   Tabnav: {screen: RootStack},
+  Login: {screen: LoginScreen},
   Register: {screen: RegisterScreen}
 },
 {})
