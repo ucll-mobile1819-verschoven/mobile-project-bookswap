@@ -8,7 +8,8 @@ import t from 'tcomb-form-native';
 
 import { db } from '../config/db';
 
-let itemsRef = db.ref('seller/');
+let itemsRef = db.ref('/seller');
+let emails = [];
 
 const Form = t.form.Form;
 
@@ -65,13 +66,36 @@ const options = {
 }
 
 export default class Registerscreen extends React.Component{  
+  componentDidMount() {
+    itemsRef.on('value', (snapshot) => {
+      let data = snapshot.val();
+      let users = Object.values(data);
+      for (let i=0; i< users.length; i++) {
+        emails.push(users[i].email);
+      }
+      
+    });
+  }
+
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
     console.log('value: ', value);
+    let exists = false;
     if (value!=null){
       //geen errors
-      this.writeUserData(value.email, value.firstname, value.lastname, value.password, value.residence)
+     for (let i=0; i< emails.length; i++) {
+       console.debug('email:' + emails[i])
+       if (emails[i] == value.email) {
+         exists = true;
+         break;
+       }
+       
+     }
+     if (!exists) {
+     this.writeUserData(value.email, value.firstname, value.lastname, value.password, value.residence)
       this.props.navigation.navigate('Welcome', {success: 'Great job! You can now login!'});
+    }
+      // TODO error email exists
     }
   }
 
@@ -101,9 +125,7 @@ handler(arg) {
     return(
       <KeyboardAvoidingView style={styles.center} style={styles.container} behavior="padding" enabled>
         <ScrollView>
-                <View>
-                  <Map handler={this.handler.bind(this)}/>
-                </View>
+                
           <View>
             <Header leftComponent={ <Logo/> } centerComponent={{ titl: 'Register', style: { color: '#fff' }}} containerStyle={{backgroundColor:'#0BB586',}}/>
             <Button title="Back" onPress={() => this.props.navigation.navigate('Welcome')} color="#0BB586"/>

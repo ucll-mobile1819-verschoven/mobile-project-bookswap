@@ -9,10 +9,11 @@ export default class LoginScreen extends React.Component {
   state = { users: [], email: '', password: '', errorMessage: null }
 
   handleLogin = () => {
-    for (let user of this.state.users) {
+    for  (let i=0; i< this.state.users.length; i++) {
       //TODO: pass sellerId property to homescreen 
-        if (this.state.email == user.email && this.state.password == user.password) {
-          this.props.navigation.navigate('Home', {sellerId: user.email});
+      console.debug(this.state.users[i])
+        if (this.state.email == this.state.users[i].email && this.state.password == this.state.users[i].password) {
+          this.props.navigation.navigate('Home', {sellerId: this.state.users[i].sellerId});
           break;
         } else {
         this.state.errorMessage= "Incorrect email or password";
@@ -24,6 +25,7 @@ export default class LoginScreen extends React.Component {
     usersRef.on('value', (snapshot) => {
       let data = snapshot.val();
       let users = Object.values(data);
+      console.debug(users);
       this.setState({ users });
     });
   }
