@@ -1,8 +1,9 @@
 import React from 'react';
 import { Text, TextInput, View, Button, AsyncStorage } from 'react-native';
-import {Header} from 'react-native-elements';
+import {Header, Input} from 'react-native-elements';
 import Logo from '../components/Logo';
 import { styles } from '../styles/Style';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { db } from '../config/db';
 
 let usersRef = db.ref('/seller');
@@ -57,6 +58,25 @@ export default class WelcomeScreen extends React.Component{
           <Text style={{ color: 'red'}}>
             {this.state.errorMessage}
           </Text>}
+         
+          <Input 
+          leftIcon = {<Icon name='user' size={18} color='black' />}
+          leftIconContainerStyle={{marginRight:15, marginLeft:15}}
+          placeholder="Email" 
+          autoCapitalize="none"
+          onChangeText={email => this.setState({ email })}
+          value={this.state.email}
+          />
+          <Input 
+          leftIcon = {<Icon name='lock' size={18} color='black' />}
+          leftIconContainerStyle={{marginRight:15, marginLeft:15}}
+          secureTextEntry
+          autoCapitalize="none"
+          placeholder="Password"
+          onChangeText={password => this.setState({ password })}
+          value={this.state.password}
+          />
+           { /*
         <TextInput
           style={styles.border}
           autoCapitalize="none"
@@ -72,7 +92,7 @@ export default class WelcomeScreen extends React.Component{
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
         />
-
+        */}
         <Button
           title="Login"
           onPress={this.handleLogin}
