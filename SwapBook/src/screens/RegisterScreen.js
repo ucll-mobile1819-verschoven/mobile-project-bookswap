@@ -4,7 +4,7 @@ import {Header} from 'react-native-elements';
 import { styles } from '../styles/Style';
 import Logo from '../components/Logo';
 import t from 'tcomb-form-native';
-import Map from '../components/Map';
+
 
 import { db } from '../config/db';
 
@@ -117,5 +117,5 @@ handler(arg) {
       </KeyboardAvoidingView>
     )
   }
-};
+};had
 
