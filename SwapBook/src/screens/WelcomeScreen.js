@@ -15,7 +15,7 @@ export default class WelcomeScreen extends React.Component{
       //TODO: pass sellerId property to homescreen 
       console.debug(this.state.users[i])
         if (this.state.email == this.state.users[i].email && this.state.password == this.state.users[i].password) {
-          this.props.navigation.navigate('Tabnav', {sellerId: this.state.users[i].sellerId});
+          this.props.navigation.navigate('Home', {sellerId: this.state.users[i].email});
           break;
         } else {
         this.state.errorMessage= "Incorrect email or password";

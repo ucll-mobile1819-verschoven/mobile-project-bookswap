@@ -75,14 +75,12 @@ componentDidMount() {
   itemsRef.on('value', (snapshot) => {
     let data = snapshot.val();
     let items = Object.values(data);
-    //console.log(items);
     this.setState({items});
   })
 }
   render(){
     
     const sellerId =this.props.navigation.getParam('sellerId');
-    
     //BOOK LOOP
     var books = [];
     for (let i=0; i< this.state.items.length; i++){
