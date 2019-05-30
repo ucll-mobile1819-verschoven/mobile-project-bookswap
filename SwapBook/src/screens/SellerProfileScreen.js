@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { styles } from '../styles/Style';
 import { db } from '../config/db';
 
-
+let usersRef = db.ref('/seller');
 
 
 export default class SellerProfileScreen extends React.Component {
@@ -25,34 +25,27 @@ export default class SellerProfileScreen extends React.Component {
     super(props);
 
     this.state = {
-        items: [],
+        users: [],
+        sellerId: ''
     };
   };
   componentDidMount(){
-  //getUser(sellerId) {
+ 
     
-   // console.log(reference);
-   const { params } = this.props.navigation.state;
-  const sellerId = params ? params.sellerId : null;
-  let reference = '/seller/' + sellerId;
-    let itemsRef = db.ref(reference);
-    itemsRef.on('value', (snapshot) => {
-      //Object with keys
-      let data = snapshot.val();
-      //Value of objects
-      let items = Object.values(data);
-      //object Keys
-      //let ids = Object.keys(data);
 
-     //let key = ids.find(sellerId);
-    //console.log(key);
-      console.log(data);
-      //console.log(items);
-      //console.log(ids);
-      this.setState({items});
+    const { params } = this.props.navigation.state;
+    const sellerId = params ? params.sellerId : null;
+    this.setState({session : sellerId});
+    console.log(sellerId);
+
+    usersRef.on('value', (snapshot) => {
+      let data = snapshot.val();
+      let users = Object.values(data);
+      this.setState({users});
     })
   }
-  
+
+    
   static navigationOptions = {
     headerStyle: {
       backgroundColor: '#164050',
@@ -64,33 +57,30 @@ export default class SellerProfileScreen extends React.Component {
     title: 'Book',
   };
   render(){
-    //const { params } = this.props.navigation.state;
-    //const sellerId = params ? params.sellerId : null;
-    //this.getUser(sellerId);
-   // <Text>sellerId: {JSON.stringify(sellerId)}</Text>
+    var user = [];
+      for  (let i=0; i< this.state.users.length; i++) {
+        if (this.state.session == this.state.users[i].email) {
+          let email = this.state.users[i].email;
+          let firstname = this.state.users[i].firstname;
+          let lastname = this.state.users[i].lastname;
+          let residence = this.state.users[i].residence;
+          user.push(
+            <View style={styles.books} key={"book" + i}>
+              <Text>Email: {email}</Text>
+              <Text>First name: {firstname}</Text>
+              <Text>Last name: {lastname}</Text>
+              <Text>Residence: {residence}</Text>
+            </View>
+          )
+        } 
+      }
     return (
       <View>
         <Header leftComponent={ <Icon name="ios-arrow-back" color={'#fff'} size={30} onPress={()=> this.props.navigation.goBack()} title='Go Back'/> } 
                 centerComponent={{ text: 'Info Seller', style: { color: '#fff' } }} 
-                containerStyle={{backgroundColor:'#0BB586'}}/>        
-        <Text>Info of the seller will be put on this page</Text>
-        
-        {this.state.items.length > 0
-          ? <Text>First Name: {this.state.items[1]}</Text>
-          : <Text> No First Name </Text>
-        }
-        {this.state.items.length > 0
-          ? <Text>Last Name: {this.state.items[2]}</Text>
-          : <Text> No Last Name </Text>
-        }
-        {this.state.items.length > 0
-          ? <Text>Email: {this.state.items[0]}</Text>
-          : <Text> No Email </Text>
-        }
-        {this.state.items.length > 0
-          ? <Text>Residence: {this.state.items[4]}</Text>
-          : <Text> No Residence </Text>
-        }
+                containerStyle={{backgroundColor:'#0BB586'}}/>   
+
+         <View>{user}</View>
 
         <Location />
       </View>
