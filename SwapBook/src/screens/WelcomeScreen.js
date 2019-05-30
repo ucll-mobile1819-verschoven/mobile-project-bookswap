@@ -24,7 +24,7 @@ export default class WelcomeScreen extends React.Component{
 
         <Button
           title="Login"
-          onPress={() => this.props.navigation.navigate('Tabnav')}
+          onPress={() => this.props.navigation.navigate('Login')}
           color="#0BB586"
         />
          <View style={{marginTop: 5, borderRadius: 5}}>
