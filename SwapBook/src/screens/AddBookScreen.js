@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Button, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { Text, View, Button, KeyboardAvoidingView, ScrollView, AsyncStorage } from 'react-native';
 import {Header} from 'react-native-elements';
 import { styles } from '../styles/Style';
 import Logo from '../components/Logo';
@@ -41,8 +41,25 @@ const options = {
 }
 
 export default class AddBookScreen extends React.Component{  
-
-  
+  constructor(props) {
+    super(props);
+    this.state = {
+        session: '',
+    };
+  }
+  getEmail = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@email');
+      this.setState({session : value})
+    } catch(e) {
+      alert(e.message);
+    }
+  }
+      
+  //GET BOOKS
+  componentDidMount() {
+      this.getEmail();
+  }
 
 
   handleSubmit = () => {
@@ -56,6 +73,7 @@ export default class AddBookScreen extends React.Component{
   }
 
   writeUserData(title, author, condition, isbn, price){
+    const sellerId = this.state.session;
     itemsRef.push({
       title,
       author,
@@ -73,14 +91,13 @@ export default class AddBookScreen extends React.Component{
 
   }
   render(){
-    sellerId = this.props.navigation.getParam('sellerId');
+
     
     return(
-      <KeyboardAvoidingView style={styles.center} style={styles.container} behavior="padding" enabled>
+      <KeyboardAvoidingView style={styles.centered} style={styles.container} behavior="padding" enabled>
+         <Header leftComponent={ <Logo/> } centerComponent={{ titl: 'Register', style: { color: '#fff' }}} containerStyle={{backgroundColor:'#0BB586',}}/>
         <ScrollView>
           <View>
-            <Header leftComponent={ <Logo/> } centerComponent={{ titl: 'Register', style: { color: '#fff' }}} containerStyle={{backgroundColor:'#0BB586',}}/>
-            
                 <View style={styles.formStyle}>
                   <Form ref={c => this._form = c} type={Book} options={options}/>
                   <Button title="Add book" onPress={this.handleSubmit} color="#0BB586"/>
