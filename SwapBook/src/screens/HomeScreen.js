@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, FlatList, View, Button, SafeAreaView } from 'react-native';
+import { Text, FlatList, View, Button, AsyncStorage } from 'react-native';
 import {Header} from 'react-native-elements';
 import Logo from '../components/Logo';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -16,6 +16,7 @@ let itemsRef = db.ref('/book');
 //Home  --  show books
 export default class HomeScreen extends React.Component{  
   
+
 
  // static navigationOptions = ({navigation}) => {
  //   const params = navigation.state.params || {};
@@ -44,6 +45,7 @@ export default class HomeScreen extends React.Component{
     // Met state kan er data bijgehouden worden binnen het component
     this.state = {
         items: [],
+        session: []
     };
 
     // functie initialiseren - alleen bij functies waarvoor this. wordt gebruikt
@@ -68,7 +70,30 @@ loadData() {
         });
 }
 */
+getName = async () => {
+  try {
+    const value = await AsyncStorage.getItem('@firstname')
+    console.log('Welkom ' + value + '!');
+    if(value !== null) {
+      alert('Welkom: ' + value);
+    }
+  } catch(e) {
+    alert(error);
+  }
+}
 
+getEmail = async () => {
+  try {
+    const value = await AsyncStorage.getItem('@email');
+    console.log('VALUE LOG ' + value);
+    let session = Object.values(value);
+    console.log('SESSION LOG ' + session);
+    this.setState({session});
+    console.log(session)
+  } catch(e) {
+    alert(e.message);
+  }
+}
 
 //GET BOOKS
 componentDidMount() {
@@ -76,11 +101,13 @@ componentDidMount() {
     let data = snapshot.val();
     let items = Object.values(data);
     this.setState({items});
+   // this.getName();
+    this.getEmail();
+    
+    
   })
 }
   render(){
-    
-    const sellerId =this.props.navigation.getParam('sellerId');
     //BOOK LOOP
     var books = [];
     for (let i=0; i< this.state.items.length; i++){
@@ -92,9 +119,9 @@ componentDidMount() {
     }
     return(
       <View style={styles.centered}>
-        
+        <Text>Email: {this.state.session}</Text>
         <Header leftComponent={ <Logo/> } centerComponent={{ text: 'SwapBook', style: { color: '#fff',}}} containerStyle={{backgroundColor:'#0BB586'}}/>
-        <Text>You are logged in as {sellerId} </Text>
+        
           <View style={{marginBottom: 5, paddingBottom: 5}}>{ books}</View>
             
 
