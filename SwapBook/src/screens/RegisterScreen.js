@@ -140,10 +140,11 @@ handler(arg) {
   render(){
     return(
       <KeyboardAvoidingView style={styles.center} style={styles.container} behavior="padding" enabled>
+         <Header leftComponent={ <Logo/> } centerComponent={{ text: 'Register', style: { color: '#fff' }}} containerStyle={{backgroundColor:'#0BB586',}}/>
         <ScrollView>
                 
           <View>
-            <Header leftComponent={ <Logo/> } centerComponent={{ text: 'Register', style: { color: '#fff' }}} containerStyle={{backgroundColor:'#0BB586',}}/>
+           
             <Button title="Back" onPress={() => this.props.navigation.navigate('Welcome')} color="#0BB586"/>
                 <View style={styles.formStyle}>
                   <Form ref={c => this._form = c} type={User} options={options}/>
