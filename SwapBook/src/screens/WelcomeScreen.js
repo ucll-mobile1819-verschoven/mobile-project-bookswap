@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TextInput, View, Button } from 'react-native';
+import { Text, TextInput, View, Button, AsyncStorage } from 'react-native';
 import {Header} from 'react-native-elements';
 import Logo from '../components/Logo';
 import { styles } from '../styles/Style';
@@ -15,7 +15,13 @@ export default class WelcomeScreen extends React.Component{
       //TODO: pass sellerId property to homescreen 
       console.debug(this.state.users[i])
         if (this.state.email == this.state.users[i].email && this.state.password == this.state.users[i].password) {
-          this.props.navigation.navigate('Home', {sellerId: this.state.users[i].email});
+
+
+          AsyncStorage.setItem('@email', this.state.users[i].email);
+          AsyncStorage.setItem('@firstname', this.state.users[i].firstname);
+          AsyncStorage.setItem('@lastname', this.state.users[i].lastname);
+          AsyncStorage.setItem('@residence', this.state.users[i].residence);
+          this.props.navigation.navigate('Tabnav');
           break;
         } else {
         this.state.errorMessage= "Incorrect email or password";
@@ -30,7 +36,6 @@ export default class WelcomeScreen extends React.Component{
       this.setState({ users });
     });
   }
-
   render(){
     let display = "none"
     const { params } = this.props.navigation.state;
@@ -46,7 +51,7 @@ export default class WelcomeScreen extends React.Component{
         <Header leftComponent={ <Logo/> } centerComponent={{ text: 'Welcome to Swapbook', style: { color: '#fff' } }} containerStyle={{backgroundColor:'#0BB586'}}/>
        <View  style={styles.welcome}>
        {/*<Text style={{display}}>{JSON.stringify(success)}</Text>*/}
-       <View style={{display}}><Button title="Great job! You can now login!" onPress={() => this.props.navigation.navigate('Tabnav')} color='#0BB586' backgroundColor='transparant'/></View>
+       <View style={{display}}><Button title="Great job! You can now login!" onPress={this.handleLogin} color='#0BB586' backgroundColor='transparant'/></View>
 
         {this.state.errorMessage &&
           <Text style={{ color: 'red'}}>

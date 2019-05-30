@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@mdi/font": "^3.6.95",
+    "@react-native-community/async-storage": "^1.4.2",
     "axios": "^0.18.0",
     "expo": "^32.0.0",
     "firebase": "^6.0.2",
