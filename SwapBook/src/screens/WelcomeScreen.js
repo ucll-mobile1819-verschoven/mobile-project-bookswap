@@ -11,10 +11,11 @@ export default class WelcomeScreen extends React.Component{
   state = { users: [], email: '', password: '', errorMessage: null }
 
   handleLogin = () => {
-    for (let user of this.state.users) {
+    for  (let i=0; i< this.state.users.length; i++) {
       //TODO: pass sellerId property to homescreen 
-        if (this.state.email == user.email && this.state.password == user.password) {
-          this.props.navigation.navigate('Tabnav', {sellerId: user.email});
+      console.debug(this.state.users[i])
+        if (this.state.email == this.state.users[i].email && this.state.password == this.state.users[i].password) {
+          this.props.navigation.navigate('Tabnav', {sellerId: this.state.users[i].sellerId});
           break;
         } else {
         this.state.errorMessage= "Incorrect email or password";
@@ -72,12 +73,7 @@ export default class WelcomeScreen extends React.Component{
 </View>
         <Button
           title="Login"
-          onPress={() => this.props.navigation.navigate(this.handleLogin)}
-          color="#0BB586"
-        />
-        <Button
-          title="Login without logging in"
-          onPress={() => this.props.navigation.navigate('Tabnav')}
+          onPress={this.handleLogin}
           color="#0BB586"
         />
          <View style={{marginTop: 5, borderRadius: 5}}>
