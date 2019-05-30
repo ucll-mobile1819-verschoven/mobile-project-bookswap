@@ -68,17 +68,6 @@ loadData() {
         });
 }
 */
-getName = async () => {
-  try {
-    const value = await AsyncStorage.getItem('@firstname')
-    console.log('Welkom ' + value + '!');
-    if(value !== null) {
-      alert('Welkom: ' + value);
-    }
-  } catch(e) {
-    alert(error);
-  }
-}
 
 getEmail = async () => {
   try {
@@ -109,9 +98,7 @@ componentDidMount() {
     let data = snapshot.val();
     let items = Object.values(data);
     this.setState({items});
-   // this.getName();
     this.getEmail();
-    
     
   })
 }
@@ -129,12 +116,13 @@ componentDidMount() {
     return(
       <View style={styles.centered}>
         <Header leftComponent={ <Logo/> } centerComponent={{ text: 'SwapBook', style: { color: '#fff',}}} containerStyle={{backgroundColor:'#0BB586'}}/>
-       
-          <Text>Email: {this.state.session}</Text>
-          <ScrollView style={{marginBottom: 5, paddingBottom: 5}}>{ books}</ScrollView>
-          <Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook', {sellerId: sellerId})} color="#BFFF00" style={styles.books}/>
-          <Card title="Random fact"><Text>{this.state.number}</Text></Card> 
-       
+        
+          <ScrollView style={{marginBottom: 5, paddingBottom: 5, maxHeight: "55%"}}>{ books}</ScrollView>
+          <View style={styles.centered}>
+            <Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook')} color="#BFFF00" style={styles.books}/>
+            <Card style={{marginBottom:50, paddingBottom: 50}} title="Random fact"><Text>{this.state.number}</Text></Card> 
+          </View>
+         
       </View>
     )
   }
