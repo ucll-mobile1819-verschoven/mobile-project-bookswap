@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text, FlatList, View, Button, AsyncStorage } from 'react-native';
-import {Header} from 'react-native-elements';
+import { Text, FlatList, View, Button, SafeAreaView } from 'react-native';
+import {Header, Card} from 'react-native-elements';
 import Logo from '../components/Logo';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { styles } from '../styles/Style';
@@ -45,11 +45,12 @@ export default class HomeScreen extends React.Component{
     // Met state kan er data bijgehouden worden binnen het component
     this.state = {
         items: [],
-        session: []
+        number: ''
     };
 
+    this.loadRandomFact = this.loadRandomFact.bind(this);
     // functie initialiseren - alleen bij functies waarvoor this. wordt gebruikt
-  //  this.loadData = this.loadData.bind(this);
+  //this.loadData = this.loadData.bind(this);
     //this.getAllBooks = this.getAllBooks.bind(this);
 
 }
@@ -82,19 +83,20 @@ getName = async () => {
   }
 }
 
-getEmail = async () => {
-  try {
-    const value = await AsyncStorage.getItem('@email');
-    console.log('VALUE LOG ' + value);
-    let session = Object.values(value);
-    console.log('SESSION LOG ' + session);
-    this.setState({session});
-    console.log(session)
-  } catch(e) {
-    alert(e.message);
-  }
+loadRandomFact() {
+  axios.get("http://numbersapi.com/random/trivia")
+        // .then - bij een 200 (OK)
+        // krijgt een response mee: JSON
+        .then((response) => {
+            // Wanneer OK dan voert hij alles hierbinnen uit
+            if (this.state.number == '') {
+              this.setState({
+              number : response.data})
+              
+            }
+        })
 }
-
+    
 //GET BOOKS
 componentDidMount() {
   itemsRef.on('value', (snapshot) => {
@@ -108,6 +110,8 @@ componentDidMount() {
   })
 }
   render(){
+    this.loadRandomFact();
+    const sellerId =this.props.navigation.getParam('sellerId');
     //BOOK LOOP
     var books = [];
     for (let i=0; i< this.state.items.length; i++){
@@ -122,10 +126,16 @@ componentDidMount() {
         <Text>Email: {this.state.session}</Text>
         <Header leftComponent={ <Logo/> } centerComponent={{ text: 'SwapBook', style: { color: '#fff',}}} containerStyle={{backgroundColor:'#0BB586'}}/>
         
+        
+        <Text>You are logged in as {sellerId} </Text>
           <View style={{marginBottom: 5, paddingBottom: 5}}>{ books}</View>
             
 
             <Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook', {sellerId: sellerId})} color="#BFFF00" style={styles.books}/>
+      
+
+     <Card title="Random fact"><Text>{this.state.number}</Text>
+       </Card> 
       </View>
     )
   }
