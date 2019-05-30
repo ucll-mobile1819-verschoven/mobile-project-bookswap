@@ -16,6 +16,7 @@ let itemsRef = db.ref('/book');
 //Home  --  show books
 export default class HomeScreen extends React.Component{  
   
+
  // static navigationOptions = ({navigation}) => {
  //   const params = navigation.state.params || {};
    // return {
@@ -78,8 +79,8 @@ componentDidMount() {
     this.setState({items});
   })
 }
-
   render(){
+    
     const sellerId =this.props.navigation.getParam('sellerId');
     
     //BOOK LOOP
@@ -99,7 +100,7 @@ componentDidMount() {
           <View style={{marginBottom: 5, paddingBottom: 5}}>{ books}</View>
             
 
-            <Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook')} color="#BFFF00" style={styles.books}/>
+            <Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook', {sellerId: sellerId})} color="#BFFF00" style={styles.books}/>
       </View>
     )
   }

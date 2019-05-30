@@ -9,14 +9,15 @@ import { db } from '../config/db';
 
 let itemsRef = db.ref('book/');
 const Form = t.form.Form;
+let sellerId = '';
+
 
 const Book = t.struct({
     title: t.String,
     author: t.String,
     condition: t.String,    
     isbn: t.String,
-    price: t.String,
-    sellerId: t.String,
+    price: t.String
 });
 
 const options = {
@@ -35,25 +36,26 @@ const options = {
     },
     price: {
       error: 'You will not sell your book for free, will you?'
-    },
-    sellerId: {
-      error: 'We need to know who is selling the book!'
-    },
+    }
   }
 }
 
 export default class AddBookScreen extends React.Component{  
+
+  
+
+
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
-    console.log('value: ', value);
+    
     if (value!=null){
       //geen errors
-      this.writeUserData(value.title, value.author, value.condition, value.isbn, value.price, value.sellerId)
-      this.props.navigation.navigate('Welcome', {success: 'Great job! You can now login!'});
+      this.writeUserData(value.title, value.author, value.condition, value.isbn, value.price)
+      this.props.navigation.navigate('Home', {sellerId: sellerId});
     }
   }
 
-  writeUserData(title, author, condition, isbn, price, sellerId){
+  writeUserData(title, author, condition, isbn, price){
     itemsRef.push({
       title,
       author,
@@ -71,6 +73,8 @@ export default class AddBookScreen extends React.Component{
 
   }
   render(){
+    sellerId = this.props.navigation.getParam('sellerId');
+    
     return(
       <KeyboardAvoidingView style={styles.center} style={styles.container} behavior="padding" enabled>
         <ScrollView>
