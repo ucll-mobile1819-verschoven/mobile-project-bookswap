@@ -13,16 +13,40 @@ let emails = [];
 
 const Form = t.form.Form;
 
+
 var Email = t.refinement(t.String, email =>{
-  const reg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/; //or any other regexp
-  return reg.test(email);
+  let exists = false;
+  for (let i=0; i< emails.length; i++) {
+    
+    if (emails[i] == email) {
+      exists = true;
+      
+    }
+  }
+  if (!exists){
+    const reg = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/; //or any other regexp
+    return reg.test(email);
+  }
+  
 });
+
+
 Email.getValidationErrorMessage = function (value, path, context) {
   if (value == null){
-    return 'Without an email address how are you going to reset your password when you forget it?'
+    return 'Without an email address how are you going to reset your password when you forget it?';
   }
-  return 'Common knowledge: a@b.com';
+  else {
+    for (let i=0; i< emails.length; i++) {
+      if (emails[i] == value) {
+       return 'This user is already registered';
+      }
+    }
+    return 'Common knowledge: a@b.com';
+  }
+  
+
 };
+
 
 var Password = t.refinement(t.String, password =>{
   const reg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; //or any other regexp
@@ -32,6 +56,7 @@ Password.getValidationErrorMessage = function (value, path, context) {
   if (value == null){
     return 'Choose something you use on a dozen other sites or something you won\'t remember.'
   }
+
   return 'Your password must be at least 8 characters including 1 number';
 };
 
@@ -56,6 +81,7 @@ const options = {
     },
     email: {
       error: Email.getValidationErrorMessage,
+      
     },
     password: {
       password: true,
@@ -66,6 +92,7 @@ const options = {
 }
 
 export default class Registerscreen extends React.Component{  
+
   componentDidMount() {
     itemsRef.on('value', (snapshot) => {
       let data = snapshot.val();
@@ -79,24 +106,14 @@ export default class Registerscreen extends React.Component{
 
   handleSubmit = () => {
     const value = this._form.getValue(); // use that ref to get the form value
+    //value of forminputs
     console.log('value: ', value);
-    let exists = false;
+    
     if (value!=null){
-      //geen errors
-     for (let i=0; i< emails.length; i++) {
-       if (emails[i] == value.email) {
-         exists = true;
-         break;
-       }
-       
-     }
-     if (!exists) {
-     this.writeUserData(value.email, value.firstname, value.lastname, value.password, value.residence)
+      this.writeUserData(value.email, value.firstname, value.lastname, value.password, value.residence)
       this.props.navigation.navigate('Welcome', {success: 'Great job! You can now login!'});
     }
-      // TODO error email exists
     }
-  }
 
   writeUserData(email, firstname, lastname, password, residence){
     itemsRef.push({
