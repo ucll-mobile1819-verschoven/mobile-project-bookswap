@@ -1,19 +1,15 @@
 import React from 'react';
-import { Text, FlatList, View, Button, SafeAreaView } from 'react-native';
+import { Text, View, Button, AsyncStorage, ScrollView  } from 'react-native';
 import {Header, Card} from 'react-native-elements';
 import Logo from '../components/Logo';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { styles } from '../styles/Style';
 import axios from 'axios';
-
 import { db } from '../config/db';
 
 let itemsRef = db.ref('/book');
 
 
-//import {Ionicons} from '@expo/vector-icons'
-
-//Home  --  show books
 export default class HomeScreen extends React.Component{  
   
 
@@ -45,7 +41,8 @@ export default class HomeScreen extends React.Component{
     // Met state kan er data bijgehouden worden binnen het component
     this.state = {
         items: [],
-        number: ''
+        number: '',
+        session: '',
     };
 
     this.loadRandomFact = this.loadRandomFact.bind(this);
@@ -83,6 +80,15 @@ getName = async () => {
   }
 }
 
+getEmail = async () => {
+  try {
+    const value = await AsyncStorage.getItem('@email');
+    this.setState({session : value})
+  } catch(e) {
+    alert(e.message);
+  }
+}
+
 loadRandomFact() {
   axios.get("http://numbersapi.com/random/trivia")
         // .then - bij een 200 (OK)
@@ -111,7 +117,6 @@ componentDidMount() {
 }
   render(){
     this.loadRandomFact();
-    const sellerId =this.props.navigation.getParam('sellerId');
     //BOOK LOOP
     var books = [];
     for (let i=0; i< this.state.items.length; i++){
@@ -123,19 +128,13 @@ componentDidMount() {
     }
     return(
       <View style={styles.centered}>
-        <Text>Email: {this.state.session}</Text>
         <Header leftComponent={ <Logo/> } centerComponent={{ text: 'SwapBook', style: { color: '#fff',}}} containerStyle={{backgroundColor:'#0BB586'}}/>
-        
-        
-        <Text>You are logged in as {sellerId} </Text>
-          <View style={{marginBottom: 5, paddingBottom: 5}}>{ books}</View>
-            
-
-            <Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook', {sellerId: sellerId})} color="#BFFF00" style={styles.books}/>
-      
-
-     <Card title="Random fact"><Text>{this.state.number}</Text>
-       </Card> 
+       
+          <Text>Email: {this.state.session}</Text>
+          <ScrollView style={{marginBottom: 5, paddingBottom: 5}}>{ books}</ScrollView>
+          <Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook', {sellerId: sellerId})} color="#BFFF00" style={styles.books}/>
+          <Card title="Random fact"><Text>{this.state.number}</Text></Card> 
+       
       </View>
     )
   }
