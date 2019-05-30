@@ -44,18 +44,16 @@ export default class WelcomeScreen extends React.Component{
     return(
       <View>
         <Header leftComponent={ <Logo/> } centerComponent={{ text: 'Welcome to Swapbook', style: { color: '#fff' } }} containerStyle={{backgroundColor:'#0BB586'}}/>
-       <View  style={styles.border}>
+       <View  style={styles.welcome}>
        {/*<Text style={{display}}>{JSON.stringify(success)}</Text>*/}
        <View style={{display}}><Button title="Great job! You can now login!" onPress={() => this.props.navigation.navigate('Tabnav')} color='#0BB586' backgroundColor='transparant'/></View>
 
-        <View style={styles.formStyle}>
-       <Text>Login</Text>
         {this.state.errorMessage &&
-          <Text style={{ color: 'red' }}>
+          <Text style={{ color: 'red'}}>
             {this.state.errorMessage}
           </Text>}
         <TextInput
-          style={styles.textInput}
+          style={styles.border}
           autoCapitalize="none"
           placeholder="Email"
           onChangeText={email => this.setState({ email })}
@@ -63,14 +61,13 @@ export default class WelcomeScreen extends React.Component{
         />
         <TextInput
           secureTextEntry
-          style={styles.textInput}
+          style={styles.border}
           autoCapitalize="none"
           placeholder="Password"
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
         />
 
-</View>
         <Button
           title="Login"
           onPress={this.handleLogin}

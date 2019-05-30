@@ -68,6 +68,9 @@ export const styles = StyleSheet.create({
         marginTop:5,
         paddingTop: 5,
     },
+    welcome:{
+        margin: 30,
+    },
       
 });
 
