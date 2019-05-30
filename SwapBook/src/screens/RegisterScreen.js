@@ -84,7 +84,6 @@ export default class Registerscreen extends React.Component{
     if (value!=null){
       //geen errors
      for (let i=0; i< emails.length; i++) {
-       console.debug('email:' + emails[i])
        if (emails[i] == value.email) {
          exists = true;
          break;
