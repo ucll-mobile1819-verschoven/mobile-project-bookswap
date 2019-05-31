@@ -36,7 +36,6 @@ export default class SellerProfileScreen extends React.Component {
     const { params } = this.props.navigation.state;
     const sellerId = params ? params.sellerId : null;
     this.setState({session : sellerId});
-    console.log(sellerId);
 
     usersRef.on('value', (snapshot) => {
       let data = snapshot.val();
