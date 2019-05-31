@@ -10,8 +10,10 @@ import SellerProfileScreen from './src/screens/SellerProfileScreen';
 import BookScreen from './src/screens/BookScreen';
 import AddBookScreen from './src/screens/AddBookScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
+import MyBookScreen from './src/screens/MyBookScreen';
+import ChangeBookScreen from './src/screens/ChangeBookScreen';
 
-console.disableYellowBox = true;
+//console.disableYellowBox = true;
 const DashboardTabNavigator = createMaterialTopTabNavigator(
   {
     Home: {
@@ -75,6 +77,12 @@ const RootStack = createStackNavigator(
     },
     SellerProfile: {
       screen: SellerProfileScreen,
+    },
+    MyBookScreen: {
+      screen: MyBookScreen,
+    },
+    ChangeBookScreen: {
+      screen: ChangeBookScreen,
     },
   },
   {
