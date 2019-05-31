@@ -8,36 +8,13 @@ import UsersMap from './UsersMap';
 
 //Dit moet gebruikt worden in de paginas waar een map nodig is
 //Dit is dus niet de hoofdpagina natuurlijk
-export default class Location extends React.Component{
+export default class SellerLocation extends React.Component{
   state = {
     userLocation: null,
     sellerLocation: []
   }
 
-  //get user location
-  getUserLocationHandler = () => {
-      navigator.geolocation.getCurrentPosition(position => {
-        this.setState({
-          userLocation: {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            latitudeDelta: 1.0,
-            longitudeDelta: 1.0,
-          }
-        });
-        //SET location seller of book         => Will need it with making an acount
-       /* fetch('https://swapbook-2403f.firebaseio.com/seller.json', {
-          method: 'POST',
-          body: JSON.stringify({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          })
-        })
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
-*/
-      }, err => console.log(err));
-  }
+  
   getSellerLocationHandler = () => {
       //GET location seller of book
       fetch('https://swapbook-2403f.firebaseio.com/seller.json')
@@ -51,9 +28,11 @@ export default class Location extends React.Component{
             id: key
           })
         }
+        if (this.state.sellerLocation.length == 0){
         this.setState({
           sellerLocation: locationArray
         });
+      }
       })
       .catch(err => console.log(err));
     }

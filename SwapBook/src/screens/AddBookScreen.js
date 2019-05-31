@@ -95,7 +95,7 @@ export default class AddBookScreen extends React.Component{
     
     return(
       <KeyboardAvoidingView style={styles.centered} style={styles.container} behavior="padding" enabled>
-         <Header leftComponent={ <Logo/> } centerComponent={{ titl: 'Register', style: { color: '#fff' }}} containerStyle={{backgroundColor:'#0BB586',}}/>
+         <Header leftComponent={ <Logo/> } centerComponent={{ text: 'Add book', style: { color: '#fff' }}} containerStyle={{backgroundColor:'#0BB586',}}/>
         <ScrollView>
           <View>
                 <View style={styles.formStyle}>
