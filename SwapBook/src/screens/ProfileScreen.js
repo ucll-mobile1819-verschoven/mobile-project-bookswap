@@ -68,7 +68,7 @@ export default class ProfileScreen extends React.Component {
           let lastname = this.state.users[i].lastname;
           let residence = this.state.users[i].residence;
           user.push(
-            <View style={styles.books} key={"book" + i}>
+            <View style={styles.books} key={"userinfo" + i}>
               <Text>Email: {email}</Text>
               <Text>First name: {firstname}</Text>
               <Text>Last name: {lastname}</Text>
