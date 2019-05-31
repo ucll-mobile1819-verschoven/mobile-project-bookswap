@@ -70,6 +70,7 @@ export const styles = StyleSheet.create({
     },
     welcome:{
         margin: 30,
+        marginTop:'50%'
     },
       
 });
