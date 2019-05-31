@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     },
     centered: {
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     mapContainer: {
         flex: 1,
