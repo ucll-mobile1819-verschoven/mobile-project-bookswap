@@ -4,6 +4,7 @@ import {Header} from 'react-native-elements';
 import { styles } from '../styles/Style';
 import Logo from '../components/Logo';
 import t from 'tcomb-form-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { db } from '../config/db';
 
@@ -65,9 +66,9 @@ export default class ChangeBookScreen extends React.Component{
         'title' : value.title,
         
       })
-      this.props.navigation.navigate('MyBookscreen', {session:  this.state.session});
+      
     }
-    
+    this.props.navigation.navigate('MyBookscreen', {session:  this.state.session});
 
   }
   handleSubmitDelete = () => {
