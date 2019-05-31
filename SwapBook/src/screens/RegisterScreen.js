@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text, View, Button, KeyboardAvoidingView, ScrollView } from 'react-native';
-import {Header} from 'react-native-elements';
+import { Text, View, KeyboardAvoidingView, ScrollView } from 'react-native';
+import {Header, Button} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { styles } from '../styles/Style';
 import Logo from '../components/Logo';
 import t from 'tcomb-form-native';
@@ -145,10 +146,25 @@ handler(arg) {
                 
           <View>
            
-            <Button title="Back" onPress={() => this.props.navigation.navigate('Welcome')} color="#0BB586"/>
+            <Button 
+            buttonStyle={{ marginTop: 15, marginLeft: 15, marginRight:15}}  
+            icon={
+              <Icon
+                name="arrow-left"
+                size={25}
+                color="#0BB586"
+              />
+            }
+            type="clear" 
+            onPress={() => this.props.navigation.navigate('Welcome')} />
+
                 <View style={styles.formStyle}>
                   <Form ref={c => this._form = c} type={User} options={options}/>
-                  <Button title="Sign Up" onPress={this.handleSubmit} color="#0BB586"/>
+                  <Button 
+                  buttonStyle={{ marginTop:10, backgroundColor:"#0BB586"}} 
+                  type="solid" 
+                  title="Sign Up" 
+                  onPress={this.handleSubmit}/>
 	      	      </View>
                
           </View>
