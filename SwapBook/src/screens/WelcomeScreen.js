@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, AsyncStorage, Image } from 'react-native';
+import { Text, View, AsyncStorage, ScrollView, KeyboardAvoidingView} from 'react-native';
 import {Header, Input, Button, Card} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Logo from '../components/Logo';
@@ -63,13 +63,14 @@ export default class WelcomeScreen extends React.Component{
 
 
     return(
-      <View>
+      <KeyboardAvoidingView style={styles.center} style={styles.container} behavior="padding" enabled>
         <Header leftComponent={ <Logo/> } centerComponent={{ text: 'Welcome to Swapbook', style: { color: '#fff' } }} containerStyle={{backgroundColor:'#0BB586'}}/>
-        
-        <View  style={styles.welcome}>
-       
+
+        <ScrollView >
+        <View styles={styles.welcome}>
+      
        {/*<Text style={{display}}>{JSON.stringify(success)}</Text>*/}
-       <View style={{display}}><Button title="Great job! You can now login!" onPress={this.handleLogin} color='#0BB586' backgroundColor='transparant'/></View>
+       <View style={{display}}><Button title="Great job! You can now login!" titleStyle={{color:"#0BB586"}}  onPress={this.handleLogin} type= "clear" /></View>
        
       <Card  containerStyle={{marginBottom:60}} titleStyle={{color:'#0BB586'}} title="Random fact"><Text>{this.state.number}</Text></Card>
        
@@ -131,11 +132,11 @@ export default class WelcomeScreen extends React.Component{
           onPress={() => this.props.navigation.navigate('Register')} 
         />
 
-        </View>
+        </View></View></ScrollView></KeyboardAvoidingView>
+
         
-        </View>
         
-      </View>
+ 
     )
   }
 };
