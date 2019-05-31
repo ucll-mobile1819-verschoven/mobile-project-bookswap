@@ -4,6 +4,7 @@ import {Header} from 'react-native-elements';
 import Logo from '../components/Logo';
 import { styles } from '../styles/Style';
 import { db } from '../config/db';
+import Location from '../components/UserLocation';
 
 let usersRef = db.ref('/seller');
 let itemsRef = db.ref('/book');
@@ -78,16 +79,18 @@ export default class ProfileScreen extends React.Component {
         } 
       }
       return (
+          <View>
         <View style={styles.centered}>
-          <Header leftComponent={ <Logo/> } centerComponent={{ text: 'My Profile', style: { color: '#fff' } }} containerStyle={{backgroundColor:'#0BB586'}  }/>
+          <Header leftComponent={ <Logo/> } rightComponent={<Button title="Logout" onPress={this.logout} color="white"/>} centerComponent={{ text: 'My Profile', style: { color: '#fff' } }} containerStyle={{backgroundColor:'#0BB586'}  }/>
          
           <View>{user}</View>
           <Button title="Logout" onPress={this.logout} color="#0BB586"/>
           <Button title='Show My Books' onPress={() => this.props.navigation.navigate('MyBookScreen', {session:  this.state.session}) } color="#0BB586"/>
     
         </View>
-  
+        
+         <Location />
+         </View>
       );
     }
   }
-  

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text, View, Button, KeyboardAvoidingView, ScrollView, AsyncStorage } from 'react-native';
-import {Header} from 'react-native-elements';
+import { Text, View, KeyboardAvoidingView, ScrollView, AsyncStorage } from 'react-native';
+import {Header, Button} from 'react-native-elements';
 import { styles } from '../styles/Style';
 import Logo from '../components/Logo';
 import t from 'tcomb-form-native';
@@ -95,12 +95,21 @@ export default class AddBookScreen extends React.Component{
     
     return(
       <KeyboardAvoidingView style={styles.centered} style={styles.container} behavior="padding" enabled>
-         <Header leftComponent={ <Logo/> } centerComponent={{ titl: 'Register', style: { color: '#fff' }}} containerStyle={{backgroundColor:'#0BB586',}}/>
+         <Header leftComponent={ <Logo/> } centerComponent={{ text: 'Add book', style: { color: '#fff' }}} containerStyle={{backgroundColor:'#0BB586',}}/>
         <ScrollView>
           <View>
                 <View style={styles.formStyle}>
                   <Form ref={c => this._form = c} type={Book} options={options}/>
-                  <Button title="Add book" onPress={this.handleSubmit} color="#0BB586"/>
+                  <Button 
+                  buttonStyle={
+                    {
+                      marginTop:15,
+                      backgroundColor:"#0BB586"
+                    }
+                  }
+                  type="solid"
+                  title="Add book" 
+                  onPress={this.handleSubmit}/>
 	      	      </View>
           </View>
         </ScrollView>

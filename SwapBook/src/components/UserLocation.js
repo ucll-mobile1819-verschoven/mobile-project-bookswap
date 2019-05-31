@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button } from 'react-native';
-
+import { Platform, StyleSheet, View} from 'react-native';
+import {Text} from 'react-native-elements';
 
 import FetchLocation from './FetchLocation'
 import UsersMap from './UsersMap';
@@ -8,7 +8,7 @@ import UsersMap from './UsersMap';
 
 //Dit moet gebruikt worden in de paginas waar een map nodig is
 //Dit is dus niet de hoofdpagina natuurlijk
-export default class Location extends React.Component{
+export default class UserLocation extends React.Component{
   state = {
     userLocation: null,
     sellerLocation: []
@@ -17,6 +17,7 @@ export default class Location extends React.Component{
   //get user location
   getUserLocationHandler = () => {
       navigator.geolocation.getCurrentPosition(position => {
+        if(this.state.userLocation == null) {
         this.setState({
           userLocation: {
             latitude: position.coords.latitude,
@@ -25,6 +26,7 @@ export default class Location extends React.Component{
             longitudeDelta: 1.0,
           }
         });
+    }
         //SET location seller of book         => Will need it with making an acount
        /* fetch('https://swapbook-2403f.firebaseio.com/seller.json', {
           method: 'POST',
@@ -38,35 +40,15 @@ export default class Location extends React.Component{
 */
       }, err => console.log(err));
   }
-  getSellerLocationHandler = () => {
-      //GET location seller of book
-      fetch('https://swapbook-2403f.firebaseio.com/seller.json')
-      .then(response => response.json())
-      .then(parsedResponse => {
-        const locationArray = [];
-        for (const key in parsedResponse){
-          locationArray.push({
-            latitude: parsedResponse[key].latitude,
-            longitude: parsedResponse[key].longitude,
-            id: key
-          })
-        }
-        this.setState({
-          sellerLocation: locationArray
-        });
-      })
-      .catch(err => console.log(err));
-    }
+  
 
   render() {
+      this.getUserLocationHandler();
     return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Button title="Get Seller Location" onPress={this.getSellerLocationHandler} style={styles.flex1} color='#0BB586'/>
-          <FetchLocation onGetLocation={this.getUserLocationHandler} style={styles.flex2}/>
-        </View>
+    <View style={styles.container}>
+        <View style={styles.header}><Text h4 h4Style={{color:"white", fontSize:18}}>Your current location</Text></View>
         <UsersMap userLocation={this.state.userLocation} sellerLocation={this.state.sellerLocation} style={styles.flex3}/>
-      </View>
+    </View>
     );
   }
 }
@@ -74,11 +56,12 @@ export default class Location extends React.Component{
 const styles = StyleSheet.create({
   container: {
     marginTop: '20%',
-    backgroundColor: "#ffe",
+    backgroundColor: "#0BB586",
   },
   header: {
-    textAlign: 'center',
-    marginBottom: 20,
+    alignItems: 'center',
+    marginBottom: 5,
+    marginTop:5
   },
   flex1: {
     flex: 1,

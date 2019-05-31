@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     },
     centered: {
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
     mapContainer: {
         flex: 1,
@@ -70,7 +70,7 @@ export const styles = StyleSheet.create({
     },
     welcome:{
         margin: 30,
-        marginTop:'50%'
+        marginTop:'20%'
     },
       
 });

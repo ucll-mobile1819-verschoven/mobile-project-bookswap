@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, Button, ScrollView } from 'react-native';
-import Location from '../components/Location';
+import Location from '../components/SellerLocation';
 import {Header} from 'react-native-elements';
 import Logo from '../components/Logo';
 import Icon from 'react-native-vector-icons/Ionicons'
