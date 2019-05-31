@@ -4,7 +4,6 @@ import {Header, Card} from 'react-native-elements';
 import Logo from '../components/Logo';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { styles } from '../styles/Style';
-import axios from 'axios';
 import { db } from '../config/db';
 
 let itemsRef = db.ref('/book');
@@ -41,7 +40,6 @@ export default class HomeScreen extends React.Component{
     // Met state kan er data bijgehouden worden binnen het component
     this.state = {
         items: [],
-        number: '',
         session: '',
     };
 
@@ -78,19 +76,7 @@ getEmail = async () => {
   }
 }
 
-loadRandomFact() {
-  axios.get("http://numbersapi.com/random/trivia")
-        // .then - bij een 200 (OK)
-        // krijgt een response mee: JSON
-        .then((response) => {
-            // Wanneer OK dan voert hij alles hierbinnen uit
-            if (this.state.number == '') {
-              this.setState({
-              number : response.data})
-              
-            }
-        })
-}
+
     
 //GET BOOKS
 componentDidMount() {
@@ -103,7 +89,7 @@ componentDidMount() {
   })
 }
   render(){
-    this.loadRandomFact();
+    
     //BOOK LOOP
     var books = [];
     for (let i=0; i< this.state.items.length; i++){
@@ -120,7 +106,7 @@ componentDidMount() {
           <ScrollView style={{marginBottom: 5, paddingBottom: 5, maxHeight: "55%"}}>{ books}</ScrollView>
           <View style={styles.centered}>
             <Button title="AddBook" onPress={() => this.props.navigation.navigate('AddBook')} color="#BFFF00" style={styles.books}/>
-            <Card style={{marginBottom:50, paddingBottom: 50}} title="Random fact"><Text>{this.state.number}</Text></Card> 
+             
           </View>
          
       </View>

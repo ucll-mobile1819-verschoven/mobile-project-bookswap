@@ -1,15 +1,18 @@
 import React from 'react';
 import { Text, View, AsyncStorage, Image } from 'react-native';
-import {Header, Input, Button} from 'react-native-elements';
+import {Header, Input, Button, Card} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Logo from '../components/Logo';
 import { styles } from '../styles/Style';
+
+import axios from 'axios';
 import { db } from '../config/db';
 
 let usersRef = db.ref('/seller');
 
 export default class WelcomeScreen extends React.Component{  
-  state = { users: [], email: '', password: '', errorMessage: null }
+  state = { 
+    number: '', users: [], email: '', password: '', errorMessage: null }
 
   handleLogin = () => {
     for  (let i=0; i< this.state.users.length; i++) {
@@ -27,6 +30,20 @@ export default class WelcomeScreen extends React.Component{
     }
   }
 
+  loadRandomFact() {
+    axios.get("http://numbersapi.com/random/trivia")
+          // .then - bij een 200 (OK)
+          // krijgt een response mee: JSON
+          .then((response) => {
+              // Wanneer OK dan voert hij alles hierbinnen uit
+              if (this.state.number == '') {
+                this.setState({
+                number : response.data})
+                
+              }
+          })
+  }
+
   componentDidMount() {
     usersRef.on('value', (snapshot) => {
       let data = snapshot.val();
@@ -35,6 +52,7 @@ export default class WelcomeScreen extends React.Component{
     });
   }
   render(){
+    this.loadRandomFact();
     let display = "none"
     const { params } = this.props.navigation.state;
     const success = params ? params.success : null;
@@ -47,11 +65,14 @@ export default class WelcomeScreen extends React.Component{
     return(
       <View>
         <Header leftComponent={ <Logo/> } centerComponent={{ text: 'Welcome to Swapbook', style: { color: '#fff' } }} containerStyle={{backgroundColor:'#0BB586'}}/>
-       <View  style={styles.welcome}>
-
+        
+        <View  style={styles.welcome}>
+       
        {/*<Text style={{display}}>{JSON.stringify(success)}</Text>*/}
        <View style={{display}}><Button title="Great job! You can now login!" onPress={this.handleLogin} color='#0BB586' backgroundColor='transparant'/></View>
-
+       
+      <Card  containerStyle={{marginBottom:60}} title="Random fact"><Text>{this.state.number}</Text></Card>
+       
       {this.state.errorMessage &&
           <Text style={{ color: 'red'}}>
             {this.state.errorMessage}
@@ -110,9 +131,10 @@ export default class WelcomeScreen extends React.Component{
           onPress={() => this.props.navigation.navigate('Register')} 
         />
 
-
         </View>
+        
         </View>
+        
       </View>
     )
   }
