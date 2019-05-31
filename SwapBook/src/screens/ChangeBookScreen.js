@@ -53,38 +53,27 @@ export default class ChangeBookScreen extends React.Component{
 
 
   handleSubmitUpdate = () => {
-    const value = this._form.getValue(); // use that ref to get the form value
+    const value = this._form.getValue();
     
     if (value!=null){
-      //geen errors
-      this.writeUserData(value.title, value.author, value.condition, value.isbn, value.price)
-      this.props.navigation.navigate('Home', {sellerId: sellerId});
+      itemsRef.child(this.state.itemId).update({
+        'author': value.author,
+        'condition' : value.condition,
+        'isbn' : value.isbn,
+        'price' : value.price,
+        'sellerId' : this.state.session,
+        'title' : value.title,
+        
+      })
+      this.props.navigation.navigate('MyBookscreen', {session:  this.state.session});
     }
+    
+
   }
   handleSubmitDelete = () => {
-    console.log(this.state.itemId);
     let removeRef = db.ref('book/' + this.state.itemId);
     removeRef.remove()
     this.props.navigation.navigate('MyBookScreen', {session:  this.state.session});
-  }
-
-  writeUserData(title, author, condition, isbn, price){
-    const sellerId = this.state.session;
-    itemsRef.update({
-      title,
-      author,
-      condition,
-      isbn,
-      price,
-      sellerId
-    }).then((data)=>{
-        //success callback
-        console.log('data ' , data)
-    }).catch((error)=>{
-        //error callback
-        console.log('error ' , error)
-    })
-
   }
         
   componentDidMount() {
