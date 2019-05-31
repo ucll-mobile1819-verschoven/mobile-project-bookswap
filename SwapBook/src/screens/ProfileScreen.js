@@ -79,13 +79,12 @@ export default class ProfileScreen extends React.Component {
       }
       return (
         <View style={styles.centered}>
-          <Header leftComponent={ <Logo/> } centerComponent={{ text: 'My Profile', style: { color: '#fff' } }} containerStyle={{backgroundColor:'#0BB586'}  }/>
+          <Header leftComponent={ <Logo/> } rightComponent={<Button title="Logout" onPress={this.logout} color="white"/>} centerComponent={{ text: 'My Profile', style: { color: '#fff' } }} containerStyle={{backgroundColor:'#0BB586'}  }/>
          
           <View>{user}</View>
-          <Button title="Logout" onPress={this.logout} color="#0BB586"/>
+          
         </View>
   
       );
     }
   }
-  

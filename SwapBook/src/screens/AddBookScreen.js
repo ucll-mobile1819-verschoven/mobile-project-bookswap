@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text, View, Button, KeyboardAvoidingView, ScrollView, AsyncStorage } from 'react-native';
-import {Header} from 'react-native-elements';
+import { Text, View, KeyboardAvoidingView, ScrollView, AsyncStorage } from 'react-native';
+import {Header, Button} from 'react-native-elements';
 import { styles } from '../styles/Style';
 import Logo from '../components/Logo';
 import t from 'tcomb-form-native';
@@ -100,7 +100,16 @@ export default class AddBookScreen extends React.Component{
           <View>
                 <View style={styles.formStyle}>
                   <Form ref={c => this._form = c} type={Book} options={options}/>
-                  <Button title="Add book" onPress={this.handleSubmit} color="#0BB586"/>
+                  <Button 
+                  buttonStyle={
+                    {
+                      marginTop:15,
+                      backgroundColor:"#0BB586"
+                    }
+                  }
+                  type="solid"
+                  title="Add book" 
+                  onPress={this.handleSubmit}/>
 	      	      </View>
           </View>
         </ScrollView>
