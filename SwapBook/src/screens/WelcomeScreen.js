@@ -14,7 +14,7 @@ export default class WelcomeScreen extends React.Component{
   handleLogin = () => {
     for  (let i=0; i< this.state.users.length; i++) {
       //TODO: pass sellerId property to homescreen 
-      console.debug(this.state.users[i])
+     // console.debug(this.state.users[i])
         if (this.state.email == this.state.users[i].email && this.state.password == this.state.users[i].password) {
 
 
