@@ -71,7 +71,7 @@ export default class WelcomeScreen extends React.Component{
        {/*<Text style={{display}}>{JSON.stringify(success)}</Text>*/}
        <View style={{display}}><Button title="Great job! You can now login!" onPress={this.handleLogin} color='#0BB586' backgroundColor='transparant'/></View>
        
-      <Card  containerStyle={{marginBottom:60}} title="Random fact"><Text>{this.state.number}</Text></Card>
+      <Card  containerStyle={{marginBottom:60}} titleStyle={{color:'#0BB586'}} title="Random fact"><Text>{this.state.number}</Text></Card>
        
       {this.state.errorMessage &&
           <Text style={{ color: 'red'}}>

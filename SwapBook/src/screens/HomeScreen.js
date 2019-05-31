@@ -43,7 +43,7 @@ export default class HomeScreen extends React.Component{
         session: '',
     };
 
-    this.loadRandomFact = this.loadRandomFact.bind(this);
+   
     // functie initialiseren - alleen bij functies waarvoor this. wordt gebruikt
   //this.loadData = this.loadData.bind(this);
     //this.getAllBooks = this.getAllBooks.bind(this);
