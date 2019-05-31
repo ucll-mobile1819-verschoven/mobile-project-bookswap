@@ -6,6 +6,7 @@ import { styles } from '../styles/Style';
 import { db } from '../config/db';
 
 let usersRef = db.ref('/seller');
+let itemsRef = db.ref('/book');
 
 export default class ProfileScreen extends React.Component {
   constructor(props) {
@@ -54,8 +55,7 @@ export default class ProfileScreen extends React.Component {
           let data = snapshot.val();
           let users = Object.values(data);
           this.setState({ users });
-        });
-
+        });        
         
     }
 
@@ -68,7 +68,7 @@ export default class ProfileScreen extends React.Component {
           let lastname = this.state.users[i].lastname;
           let residence = this.state.users[i].residence;
           user.push(
-            <View style={styles.books} key={"userinfo" + i}>
+            <View key={i +'userinfo'}>
               <Text>Email: {email}</Text>
               <Text>First name: {firstname}</Text>
               <Text>Last name: {lastname}</Text>
@@ -83,6 +83,8 @@ export default class ProfileScreen extends React.Component {
          
           <View>{user}</View>
           <Button title="Logout" onPress={this.logout} color="#0BB586"/>
+          <Button title='Show My Books' onPress={() => this.props.navigation.navigate('MyBookScreen', {session:  this.state.session}) } color="#0BB586"/>
+    
         </View>
   
       );
