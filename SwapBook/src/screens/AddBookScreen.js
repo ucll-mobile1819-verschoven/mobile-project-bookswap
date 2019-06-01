@@ -20,7 +20,7 @@ Price.getValidationErrorMessage = function (value, path, context) {
 
   return 'You will not sell your book for free, will you?';
 };
-var Isbn = t.refinement(t.String, isbn =>{
+var Isbn = t.refinement(t.Number, isbn =>{
   const reg = /^[0-9]{10}|[0-9]{13}$/;
   return reg.test(isbn);
 });
