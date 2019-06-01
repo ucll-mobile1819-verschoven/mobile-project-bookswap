@@ -5,16 +5,21 @@ import { Platform, StyleSheet, Text, View, Button } from 'react-native';
 import FetchLocation from './FetchLocation'
 import UsersMap from './UsersMap';
 
+import { db } from '../config/db';
+
+let usersRef = db.ref('/seller');
 
 //Dit moet gebruikt worden in de paginas waar een map nodig is
 //Dit is dus niet de hoofdpagina natuurlijk
 export default class SellerLocation extends React.Component{
   state = {
     userLocation: null,
+    sellerResidence: '',
     sellerLocation: []
   }
 
-  
+
+
   getSellerLocationHandler = () => {
       //GET location seller of book
       fetch('https://swapbook-2403f.firebaseio.com/seller.json')
@@ -37,7 +42,10 @@ export default class SellerLocation extends React.Component{
       .catch(err => console.log(err));
     }
 
+   
+
   render() {
+    console.debug('hihi' + this.state.sellerResidence)
     return (
       <View style={styles.container}>
         <View style={styles.header}>

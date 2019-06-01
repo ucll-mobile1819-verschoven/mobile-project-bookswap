@@ -26,9 +26,12 @@ export default class SellerProfileScreen extends React.Component {
 
     this.state = {
         users: [],
-        sellerId: ''
+        session:'',
+        sellerId: '',
+        residence: '',
     };
   };
+
   componentDidMount(){
  
     
@@ -36,6 +39,7 @@ export default class SellerProfileScreen extends React.Component {
     const { params } = this.props.navigation.state;
     const sellerId = params ? params.sellerId : null;
     this.setState({session : sellerId});
+    console.debug('ses'+this.state.session)
 
     usersRef.on('value', (snapshot) => {
       let data = snapshot.val();
@@ -63,6 +67,10 @@ export default class SellerProfileScreen extends React.Component {
           let firstname = this.state.users[i].firstname;
           let lastname = this.state.users[i].lastname;
           let residence = this.state.users[i].residence;
+          
+            this.setState({residence:residence});
+            console.debug('huh' + residence)
+          
           user.push(
             <View style={styles.books} key={"book" + i}>
               <Text>Email: {email}</Text>
@@ -80,8 +88,8 @@ export default class SellerProfileScreen extends React.Component {
                 containerStyle={{backgroundColor:'#0BB586'}}/>   
 
          <View>{user}</View>
-
-        <Location />
+         {console.debug('res:' + this.state.residence)}
+        <Location sellerResidence={this.state.residence} />
       </View>
     );
   }
