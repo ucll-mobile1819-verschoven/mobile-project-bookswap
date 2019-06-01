@@ -71,7 +71,7 @@ componentDidMount() {
                 rightComponent={<Button titleStyle={{color:"white"}} type="clear" title="Logout" onPress={this.logout} color="white"/>}/>
  
           <View style={{flexGrow:1}}>
-            <ScrollView style={{maxHeight:'80%'}}>{ books}</ScrollView>
+            <ScrollView style={{maxHeight:'70%'}}>{ books}</ScrollView>
             <View style={styles.centered}>
               <Button 
               buttonStyle={
