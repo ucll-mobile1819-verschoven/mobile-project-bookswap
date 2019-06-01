@@ -12,7 +12,6 @@ import AddBookScreen from './src/screens/AddBookScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import MyBookScreen from './src/screens/MyBookScreen';
 import ChangeBookScreen from './src/screens/ChangeBookScreen';
-
 //console.disableYellowBox = true;
 const DashboardTabNavigator = createMaterialTopTabNavigator(
   {

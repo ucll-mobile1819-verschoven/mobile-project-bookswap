@@ -13,10 +13,29 @@ export default class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      weatherData: '',
         session: '',
         users: [],
-        city: '',
+        weatherData: {
+          coord: [],
+          weather: [{
+            id: '',
+            main: '',
+            description:'',
+            icon: '',
+          }],
+          base: '',
+          main:[],
+          wind: [],
+          clouds: [],
+          rain: [],
+          snow: [],
+          dt: '',
+          sys: [],
+          id: '',
+          name: '',
+          cod: '',
+
+        }
     };
 }
     static navigationOptions = ({ navigation, navigationOptions }) => {
@@ -46,8 +65,6 @@ export default class ProfileScreen extends React.Component {
       try {
         const value = await AsyncStorage.getItem('@email');
         this.setState({session : value});
-        const place = 'Maaseik';
-        this.setState({ city: place });
       } catch(e) {
         alert(e.message);
       }
@@ -56,7 +73,7 @@ export default class ProfileScreen extends React.Component {
     //GET BOOKS
     componentDidMount() {
         this.getEmail();
- 
+        this.setState( )
         usersRef.on('value', (snapshot) => {
           let data = snapshot.val();
           let users = Object.values(data);
@@ -66,13 +83,13 @@ export default class ProfileScreen extends React.Component {
     }
 
     getWeatherData = () =>{
-      console.log("RESIDENCE");
-      console.log(this.state.residence);
 
-      axios.get("https://api.openweathermap.org/data/2.5/weather?q="+ this.state.residence +"&appid=4461c8af39efae2ba9b252bc7bad0390")
+      console.log(this.state.weatherData);
+
+      axios.get("https://api.openweathermap.org/data/2.5/weather?q="+ this.state.residence +"&appid=4461c8af39efae2ba9b252bc7bad0390&units=metric")
       .then((response) => {
           this.setState({
-          weatherData : JSON.stringify(response.data)})
+          weatherData : response.data})
       })
       //return fetch(url).then((response) => response.json())
      // this.setState({weatherData : 'reset'})
@@ -137,9 +154,11 @@ export default class ProfileScreen extends React.Component {
               title="search"
               onPress={this.getWeatherData}
             />
-            <Text>City: {this.state.residence}</Text>
-            <Text>Weather: {this.state.weatherData}</Text>
-       
+  
+            <Text>{this.state.weatherData.name}, {this.state.weatherData.sys.country}</Text>
+            <Text>{this.state.weatherData.main.temp} °C </Text>
+            <Text>{this.state.weatherData.weather[0].main} - {this.state.weatherData.weather[0].description} </Text>
+            
           </View>
           <Location style={{flex: 1}}/>
         
