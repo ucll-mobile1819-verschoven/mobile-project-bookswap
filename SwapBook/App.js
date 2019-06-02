@@ -12,6 +12,7 @@ import AddBookScreen from './src/screens/AddBookScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import MyBookScreen from './src/screens/MyBookScreen';
 import ChangeBookScreen from './src/screens/ChangeBookScreen';
+import WeatherScreen from './src/screens/WeatherScreen';
 //console.disableYellowBox = true;
 const DashboardTabNavigator = createMaterialTopTabNavigator(
   {
@@ -82,6 +83,9 @@ const RootStack = createStackNavigator(
     },
     ChangeBookScreen: {
       screen: ChangeBookScreen,
+    },
+    WeatherScreen: {
+      screen: WeatherScreen,
     },
   },
   {
