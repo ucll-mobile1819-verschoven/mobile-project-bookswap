@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button } from 'react-native';
+import { Platform, StyleSheet, Text, View, Button, AsyncStorage } from 'react-native';
 
 
 import FetchLocation from './FetchLocation'
 import UsersMap from './UsersMap';
+
+import axios from 'axios';
 
 import { db } from '../config/db';
 
@@ -19,33 +21,69 @@ export default class SellerLocation extends React.Component{
   }
 
 
+  componentDidMount() {
+    this.getSellerResidence();
+    console.debug('t' + this.state.sellerResidence)
+  }
+
+  getSellerResidence = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@sellerResidence');
+      this.setState({sellerResidence : value})
+    } catch(e) {
+      alert(e.message);
+    }
+  }
+
+  
 
   getSellerLocationHandler = () => {
-      //GET location seller of book
-      fetch('https://swapbook-2403f.firebaseio.com/seller.json')
-      .then(response => response.json())
-      .then(parsedResponse => {
-        const locationArray = [];
-        for (const key in parsedResponse){
-          locationArray.push({
-            latitude: parsedResponse[key].latitude,
-            longitude: parsedResponse[key].longitude,
-            id: key
+    axios.get("https://eu1.locationiq.com/v1/search.php?key=fd47a0f0897429&q=" + this.state.sellerResidence + "&format=json")
+          // .then - bij een 200 (OK)
+          // krijgt een response mee: JSON
+          .then((response) => {
+              // Wanneer OK dan voert hij alles hierbinnen uit
+              
+              const locationArray = [];
+              locationArray.push({
+                latitude:response.data[0].lat,
+                longitude:response.data[0].lon,
+                id:0
+              }
+              )
+
+              if(this.state.sellerLocation.length == 0) {
+                this.setState({
+                  sellerLocation:locationArray
+                })
+              }
           })
-        }
-        if (this.state.sellerLocation.length == 0){
-        this.setState({
-          sellerLocation: locationArray
-        });
-      }
-      })
-      .catch(err => console.log(err));
+          .catch(err => console.log(err))
+      //GET location seller of book
+      // fetch('https://swapbook-2403f.firebaseio.com/seller.json')
+      // .then(response => response.json())
+      // .then(parsedResponse => {
+      //   const locationArray = [];
+      //   for (const key in parsedResponse){
+      //     locationArray.push({
+      //       latitude: parsedResponse[key].latitude,
+      //       longitude: parsedResponse[key].longitude,
+      //       id: key
+      //     })
+      //   }
+      //   if (this.state.sellerLocation.length == 0){
+      //   this.setState({
+      //     sellerLocation: locationArray
+      //   });
+      // }
+      // })
+      // .catch(err => console.log(err));
     }
 
    
 
   render() {
-    console.debug('hihi' + this.state.sellerResidence)
+    
     return (
       <View style={styles.container}>
         <View style={styles.header}>

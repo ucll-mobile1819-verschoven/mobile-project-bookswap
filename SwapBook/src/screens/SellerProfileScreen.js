@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Button, ScrollView } from 'react-native';
+import { Text, View, AsyncStorage} from 'react-native';
 import Location from '../components/SellerLocation';
 import {Header} from 'react-native-elements';
 import Logo from '../components/Logo';
@@ -26,26 +26,26 @@ export default class SellerProfileScreen extends React.Component {
 
     this.state = {
         users: [],
-        session:'',
-        sellerId: '',
-        residence: '',
+        sellerId: ''
     };
   };
 
   componentDidMount(){
- 
-    
-
     const { params } = this.props.navigation.state;
     const sellerId = params ? params.sellerId : null;
-    this.setState({session : sellerId});
-    console.debug('ses'+this.state.session)
+
+    this.setState({
+      sellerId:sellerId
+    })
+
+    
 
     usersRef.on('value', (snapshot) => {
       let data = snapshot.val();
       let users = Object.values(data);
       this.setState({users});
     })
+
   }
 
     
@@ -58,18 +58,19 @@ export default class SellerProfileScreen extends React.Component {
       fontWeight: 'bold',
     },
     title: 'Book',
-  };
-  render(){
+  }; 
+
+
+  render(){    
+    
     var user = [];
       for  (let i=0; i< this.state.users.length; i++) {
-        if (this.state.session == this.state.users[i].email) {
+        if (this.state.sellerId == this.state.users[i].email) {
           let email = this.state.users[i].email;
           let firstname = this.state.users[i].firstname;
           let lastname = this.state.users[i].lastname;
           let residence = this.state.users[i].residence;
-          
-            this.setState({residence:residence});
-            console.debug('huh' + residence)
+          AsyncStorage.setItem('@sellerResidence', residence);
           
           user.push(
             <View style={styles.books} key={"book" + i}>
@@ -88,8 +89,7 @@ export default class SellerProfileScreen extends React.Component {
                 containerStyle={{backgroundColor:'#0BB586'}}/>   
 
          <View>{user}</View>
-         {console.debug('res:' + this.state.residence)}
-        <Location sellerResidence={this.state.residence} />
+        <Location/>
       </View>
     );
   }
