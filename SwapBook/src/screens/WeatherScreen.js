@@ -6,13 +6,13 @@ import { styles } from '../styles/Style';
 import axios from 'axios';
 
 export default class MyBookScreen extends React.Component {
+    
     constructor(props) {
         super(props);
         const { params } = this.props.navigation.state;
-        const residence = params ? params.residence : null;
-        this.setState({homecity : residence});
+            const homecity = params ? params.homecity : null;
         this.state = {
-            homecity : '',
+            homecity : homecity,
             weatherData: {
               coord: [],
               weather: [{
@@ -33,17 +33,30 @@ export default class MyBookScreen extends React.Component {
               name: '',
               cod: '',
             }
-        };
+        };        
     }
 
     getWeatherData = () =>{
         console.log('GET WEATHER DATA: ' + this.state.homecity);
         axios.get("https://api.openweathermap.org/data/2.5/weather?q="+ this.state.homecity +"&appid=7a041a9cabf3c0a1169a2a9fb5d1e889&units=metric")
         .then((response) => {
-            this.setState({
+          this.setState({
             weatherData : response.data})
         })
       }
+    componentDidMount(){
+        
+    /*    if (this.state.homecity == null || this.state.homecity == ''){
+            console.log('HOMECITY IS NULL');
+            const { params } = this.props.navigation.state;
+            const homecity = params ? params.homecity : null;
+            console.log('residence: ' + homecity);
+            this.setState({homecity});
+            console.log('homecity: ' + this.state.homecity);*/
+            this.getWeatherData();   
+      //  }
+        
+    }
 
   render(){ 
     return (
@@ -68,7 +81,6 @@ export default class MyBookScreen extends React.Component {
             title="search"
             onPress={this.getWeatherData}
           />
-
           <Text>{this.state.weatherData.name}, {this.state.weatherData.sys.country}</Text>
           <Text>{this.state.weatherData.main.temp} °C </Text>
           <Text>{this.state.weatherData.weather[0].main} - {this.state.weatherData.weather[0].description} </Text>

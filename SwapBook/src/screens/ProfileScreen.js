@@ -75,7 +75,7 @@ export default class ProfileScreen extends React.Component {
               <Text>Email: {email}</Text>
               <Text>Residence: {residence}</Text>
               </Card>
-              <Button color="#0BB586" title="Check the weather" onPress={() => this.props.navigation.navigate('WeatherScreen', {residence: residence})}/>
+              <Button color="#0BB586" title="Check the weather" onPress={() => this.props.navigation.navigate('WeatherScreen', {homecity: residence})}/>
             </View>
           )
         } 
