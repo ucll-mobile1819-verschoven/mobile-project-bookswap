@@ -1,9 +1,9 @@
 import React from 'react';
-import { Text, View, Animated, StyleSheet } from 'react-native';
-import {Header, Input} from 'react-native-elements';
+import { Text, View, Animated, StyleSheet, KeyboardAvoidingView, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { styles } from '../styles/Style';
 import axios from 'axios';
+import weatherIcon from "../components/WeatherIcon.js";
 
 export default class MyBookScreen extends React.Component {
     
@@ -16,7 +16,7 @@ export default class MyBookScreen extends React.Component {
 
             currentColor: 'rgba(255,255,255,0.5)',
             nextColor: this._randomColor(),
-            //icon: weatherIcon(),
+            icon: weatherIcon(),
 
             homecity : homecity,
             weatherData: {
@@ -56,8 +56,6 @@ export default class MyBookScreen extends React.Component {
             weatherData : response.data,
             currentColor: current,
             nextColor: this._randomColor(),
-            //icon: weatherIcon(weatherList.weather[0].icon)
-
             })
         })
     }
@@ -89,10 +87,11 @@ export default class MyBookScreen extends React.Component {
             alignItems: "stretch",
             justifyContent: "center"}}>
                 
-            <View style={{marginBottom: this.state.keyboardSpace}}>
+            <KeyboardAvoidingView  behavior="padding" keyboardVerticalOffset={80} >
+              <View style={{marginBottom: this.state.keyboardSpace}}>
               <View style={[animationstyles.animatedContainer]}>
                 <Text style={animationstyles.icon}>
-                  {'this.state.icon'}
+                  {weatherIcon(this.state.weatherData.weather[0].icon)}
                 </Text>
                 <Text style={animationstyles.temperature}>
                   {Math.round(this.state.weatherData.main.temp) + "°C"}
@@ -103,14 +102,17 @@ export default class MyBookScreen extends React.Component {
                 <Text style={animationstyles.weatherType}>
                   {this.state.weatherData.weather[0].description}
                 </Text>
-                <Input style={animationstyles.input} 
-            label={'City'}         
-            value={this.state.homecity}
-            onChangeText={place => this.setState({ homecity: place })}
-            returnKeyType="go"
-            onSubmitEditing={this.getWeatherData}/>
+                <TextInput style={animationstyles.input}  
+                  value={this.state.homecity}
+                  onChangeText={place => this.setState({ homecity: place })}
+                  clearButtonMode={"always"}
+                  enablesReturnKeyAutomatically={true}
+                  clearTextOnFocus={true}
+                  returnKeyType={"search"}
+                  onSubmitEditing={this.getWeatherData}/>
               </View>
-            </View>
+              </View>
+            </KeyboardAvoidingView>
           </Animated.View>
     );
   }
@@ -151,8 +153,8 @@ var animationstyles = StyleSheet.create({
       borderRadius: 5
     },
     icon: {
-    //  fontFamily: 'WeatherIcons-Regular',
-      //fontSize: 130,
+      //fontFamily: 'WeatherIcons-Regular',
+      fontSize: 130,
       padding: 0
     }
   });
