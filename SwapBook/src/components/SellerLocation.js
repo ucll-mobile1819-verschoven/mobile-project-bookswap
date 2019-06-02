@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button, AsyncStorage } from 'react-native';
-
+import { Platform, StyleSheet, View, Button, AsyncStorage } from 'react-native';
+import {Text} from 'react-native-elements';
 
 import FetchLocation from './FetchLocation'
 import UsersMap from './UsersMap';
@@ -22,14 +22,17 @@ export default class SellerLocation extends React.Component{
 
 
   componentDidMount() {
-    this.getSellerResidence();
-    console.debug('t' + this.state.sellerResidence)
+    //this.getSellerResidence();
   }
 
   getSellerResidence = async () => {
     try {
       const value = await AsyncStorage.getItem('@sellerResidence');
+      
+      if (value != null) {
       this.setState({sellerResidence : value})
+      this.getSellerLocationHandler();
+      }
     } catch(e) {
       alert(e.message);
     }
@@ -83,12 +86,10 @@ export default class SellerLocation extends React.Component{
    
 
   render() {
-    
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Button title="Get Seller Location" onPress={this.getSellerLocationHandler} style={styles.flex1} color='#0BB586'/>
-          <FetchLocation onGetLocation={this.getUserLocationHandler} style={styles.flex2}/>
+        <Button title="Get Seller Location" onPress={this.getSellerResidence} style={styles.flex1} color='#0BB586'/>
         </View>
         <UsersMap userLocation={this.state.userLocation} sellerLocation={this.state.sellerLocation} style={styles.flex3}/>
       </View>

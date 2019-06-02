@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { styles } from '../styles/Style';
 import { db } from '../config/db';
 
+
 let usersRef = db.ref('/seller');
 
 
@@ -60,6 +61,13 @@ export default class SellerProfileScreen extends React.Component {
     title: 'Book',
   }; 
 
+  storeResidence = async (res) => {
+    try {
+      await AsyncStorage.setItem('@sellerResidence', res)
+    } catch (e) {
+      alert(e.message)
+    }
+  }
 
   render(){    
     
@@ -70,8 +78,11 @@ export default class SellerProfileScreen extends React.Component {
           let firstname = this.state.users[i].firstname;
           let lastname = this.state.users[i].lastname;
           let residence = this.state.users[i].residence;
-          AsyncStorage.setItem('@sellerResidence', residence);
+
           
+          this.storeResidence(residence)
+          
+        
           user.push(
             <View style={styles.books} key={"book" + i}>
               <Text>Email: {email}</Text>
