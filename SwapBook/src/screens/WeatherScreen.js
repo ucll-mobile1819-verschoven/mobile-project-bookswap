@@ -37,7 +37,6 @@ export default class MyBookScreen extends React.Component {
     }
 
     getWeatherData = () =>{
-        console.log('GET WEATHER DATA: ' + this.state.homecity);
         axios.get("https://api.openweathermap.org/data/2.5/weather?q="+ this.state.homecity +"&appid=7a041a9cabf3c0a1169a2a9fb5d1e889&units=metric")
         .then((response) => {
           this.setState({
@@ -45,17 +44,7 @@ export default class MyBookScreen extends React.Component {
         })
       }
     componentDidMount(){
-        
-    /*    if (this.state.homecity == null || this.state.homecity == ''){
-            console.log('HOMECITY IS NULL');
-            const { params } = this.props.navigation.state;
-            const homecity = params ? params.homecity : null;
-            console.log('residence: ' + homecity);
-            this.setState({homecity});
-            console.log('homecity: ' + this.state.homecity);*/
-            this.getWeatherData();   
-      //  }
-        
+        this.getWeatherData();  
     }
 
   render(){ 
