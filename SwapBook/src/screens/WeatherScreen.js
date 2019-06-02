@@ -153,7 +153,6 @@ var animationstyles = StyleSheet.create({
       borderRadius: 5
     },
     icon: {
-      //fontFamily: 'WeatherIcons-Regular',
       fontSize: 130,
       padding: 0
     }
