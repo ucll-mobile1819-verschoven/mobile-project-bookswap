@@ -13,13 +13,33 @@ let itemsRef = db.ref('book/');
 const Form = t.form.Form;
 let sellerId = '';
 
+var Price = t.refinement(t.Number, (n) => n >= 0);
+
+Price.getValidationErrorMessage = function (value, path, context) {
+  if (value != null){
+    return 'Must be a positive number.'
+  }
+
+  return 'You will not sell your book for free, will you?';
+};
+var Isbn = t.refinement(t.Number, isbn =>{
+  const reg = /^[0-9]{10}|[0-9]{13}$/;
+  return reg.test(isbn);
+});
+Isbn.getValidationErrorMessage = function (value, path, context) {
+  if (value != null){
+    return 'Must be 10 or 13 numbers long (no hyphen).'
+  }
+
+  return 'Every book has an ISBN.';
+};
 
 const Book = t.struct({
     title: t.String,
     author: t.String,
     condition: t.String,    
-    isbn: t.String,
-    price: t.String
+    isbn: Isbn,
+    price: Price,
 });
 
 const options = {
@@ -35,10 +55,10 @@ const options = {
       
     },
     isbn: {
-      error: 'Every book has an ISBN',
+      error: Isbn.getValidationErrorMessage,
     },
     price: {
-      error: 'You will not sell your book for free, will you?',
+      error: Price.getValidationErrorMessage,
     }
   }
 }
@@ -69,9 +89,9 @@ export default class ChangeBookScreen extends React.Component{
         'title' : value.title,
         
       })
-      
+      this.props.navigation.navigate('MyBookscreen', {session:  this.state.session});
     }
-    this.props.navigation.navigate('MyBookscreen', {session:  this.state.session});
+    
 
   }
   handleSubmitDelete = () => {
