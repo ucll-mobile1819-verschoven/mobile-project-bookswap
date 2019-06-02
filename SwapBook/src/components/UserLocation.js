@@ -55,7 +55,7 @@ export default class UserLocation extends React.Component{
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: '20%',
+    marginTop: '5%',
     backgroundColor: "#0BB586",
   },
   header: {

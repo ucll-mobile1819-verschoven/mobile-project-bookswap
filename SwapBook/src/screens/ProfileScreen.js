@@ -75,20 +75,20 @@ export default class ProfileScreen extends React.Component {
               <Text>Email: {email}</Text>
               <Text>Residence: {residence}</Text>
               </Card>
-              <Button color="#0BB586" title="Check the weather" onPress={() => this.props.navigation.navigate('WeatherScreen', {homecity: residence})}/>
+              <Button type="solid" buttonStyle={
+                {
+                  marginTop:15,
+                  backgroundColor:"#0BB586"
+                }
+              } title="Check the weather" onPress={() => this.props.navigation.navigate('WeatherScreen', {homecity: residence})}/>
             </View>
           )
         } 
 
       }
       return (
-        <View style={{flex: 1}} >
+        <View>
           <Header leftComponent={ <Logo/> } rightComponent={<Button titleStyle={{color:"white"}} type="clear" title="Logout" onPress={this.logout} color="white"/>} centerComponent={{ text: 'My Profile', style: { color: '#fff' } }} containerStyle={{backgroundColor:'#0BB586'}  }/>
-          <ScrollView contentContainerStyle={{
-      flexGrow: 1,
-      justifyContent: 'space-between',
-  }}>
-          <View style={{flex: 1}}>
             <View style={styles.centered}>
             
               <View >{user}</View>
@@ -105,12 +105,9 @@ export default class ProfileScreen extends React.Component {
               onPress={() => this.props.navigation.navigate('MyBookScreen', {session:  this.state.session}) }/>
 
           </View>
-          <Location style={{flex: 1}}/>
+          <Location/>
         
-          </View>
-          </ScrollView>
-         
-      </View> 
+          </View>         
       );
     }
   }
